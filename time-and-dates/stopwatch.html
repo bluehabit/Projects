@@ -1,0 +1,139 @@
+<h2>t-pain</h2>
+<p>Its time bitch</p>
+
+<button class='startButton'>Start</button>
+<button class='stopButton'>Stop</button>
+
+<p class='result'>Result</p>
+
+<script>
+//stop watch - building
+//timer 
+//clock
+
+var startButton = document.querySelector('.startButton');
+var stopButton = document.querySelector('.stopButton');
+var result = document.querySelector('.result');
+var startTime = false;
+
+var timeWarp = {
+	startTime: false,
+	startCounter: false,
+	baseTime: 0
+}
+
+function convertTime(milliseconds){
+	var time = {
+		milliseconds: milliseconds.toFixed(0),
+		seconds: (milliseconds/1000).toFixed(0),
+		minutes: (milliseconds/(1000 * 60)).toFixed(0),
+		hours: (milliseconds/(1000 * 60 * 60)).toFixed(1),
+		days: (milliseconds/(1000 * 60 * 60 * 24)).toFixed(1)
+	};
+	console.log(time);
+	return time; 
+}
+
+startButton.addEventListener('click', function(){
+		console.log('starting timer...');
+		startTime = true;
+		updateTime();
+});
+
+stopButton.addEventListener('click', function(){
+	console.log('stopping timer');
+	startTime = false;
+});
+
+
+function updateTime(time){
+
+	var endTime = Date.now();
+	var difference; 
+	var convertedDifference;
+
+	var milliseconds;
+	var seconds;
+	var minutes; 
+	var hours;
+
+	if(!timeWarp.startCounter){
+		timeWarp.startCounter = true
+		timeWarp.baseTime = Date.now();
+		// endTime.setMinutes(0);
+		// endTime.setHours(0);
+	}
+
+	if(startTime){
+		// var startTime = Date.now();
+		// var difference; 
+
+		setTimeout(function(){
+			difference = timeDifference(timeWarp.baseTime, endTime);
+			convertedDifference = convertTime(difference);
+
+			seconds = convertedDifference.seconds;
+			minutes = convertedDifference.minutes;
+			milliseconds = convertedDifference.milliseconds;
+
+			if(seconds >= 10){
+				console.log('greater than 10')
+				convertedDifference.seconds === 0;
+			}
+			
+			console.log(convertedDifference);
+			result.innerText = minutes + ' : ' + seconds + ' : ' + milliseconds;
+			updateTime();
+		}, 3);
+
+		// setTimeout(updateTime, 1000);
+		// console.log(endTime);
+		// convertTime(endTime);
+		// console.log('one second.')
+	} else {
+		return;
+	}
+}
+
+function timeDifference(startTime, endTime){
+	var difference = endTime - startTime;
+	convertTime(difference);
+	return difference; 
+}
+
+
+// startButton.addEventListener('click', function(){
+// 	if(!startTime){
+// 		var baseTime = 0;
+// 		var startTime = Date.now();
+
+// 		setTimeout(function(){
+// 			convertTime(startTime);
+// 			result.innerText = startTime; 
+// 			console.log('one sec.')
+// 		}, 1000);
+// 	}
+// });
+
+
+// function updateTime(time){
+// 	if(startTime){
+// 		// var baseTime = 0;
+// 		// var startTime = Date.now();
+
+// 		// setTimeout(function(){
+// 		// 	convertTime(startTime);
+// 		// 	result.innerText = startTime; 
+// 		// 	console.log('one sec.')
+// 		// }, 1000);
+
+// 		setTimeout(updateTime, 1000);
+// 		console.log('one sec');
+// 	} else {
+// 		return;
+// 	}
+// }
+
+
+</script>
+
