@@ -1,13 +1,19 @@
-<h2>t-pain</h2>
+<div class='container'>
+	<h2>Stop-Watch</h2>
 
-<button class='startButton'>Start</button>
-<button class='stopButton'>Stop</button>
+	<p class='result'>0 : 0 : 00</p>
 
-<p class='result'>Result</p>
+	<div class='buttonContainer'>
+		<button class='startButton'>Start</button>
+		<button class='stopButton'>Stop</button>
+		<button class='resetButton'>Reset</button>
+	</div>
 
+</div>
 <script>
 var startButton = document.querySelector('.startButton');
 var stopButton = document.querySelector('.stopButton');
+var resetButton = document.querySelector('.resetButton');
 
 var result = document.querySelector('.result');
 var startTime = false;
@@ -22,11 +28,11 @@ var timeWarp = {
 //convert milliseconds to seconds, minutes or hours
 function convertTime(milliseconds){
 	var time = {
-		milliseconds: milliseconds.toFixed(0),
+		milliseconds: (milliseconds.toFixed(0)%1000),
 		seconds: ((milliseconds/1000)%60).toFixed(0),
-		minutes: (milliseconds/(1000 * 60)).toFixed(0),
-		hours: (milliseconds/(1000 * 60 * 60)).toFixed(1),
-		days: (milliseconds/(1000 * 60 * 60 * 24)).toFixed(1)
+		minutes: Math.floor((milliseconds/(1000 * 60))),
+		// hours: (milliseconds/(1000 * 60 * 60)).toFixed(1),
+		// days: (milliseconds/(1000 * 60 * 60 * 24)).toFixed(1)
 	};
 
 	return time; 
@@ -45,6 +51,11 @@ stopButton.addEventListener('click', function(){
 	startTime = false;
 });
 
+resetButton.addEventListener('click', function(){
+	console.log('reset');
+	startTime = false;
+})
+
 
 function updateTime(time){
 
@@ -52,11 +63,6 @@ function updateTime(time){
 
 	var difference; 
 	var convertedDifference;
-
-	var milliseconds;
-	var seconds;
-	var minutes; 
-	var hours;
 
 	if(!timeWarp.startCounter){
 		timeWarp.startCounter = true
@@ -74,7 +80,6 @@ function updateTime(time){
 			
 			console.log(convertedDifference);
 			printTimeResult(convertedDifference)
-			// result.innerText = minutes + ' : ' + seconds + ' : ' + milliseconds;
 			updateTime();
 		}, 3);
 	} else {
@@ -83,9 +88,7 @@ function updateTime(time){
 }
 
 function printTimeResult(time){
-	//build this up using conditionals to return
-	//the final print to the user
-	return result.innerText = time.minutes%60 + ' : ' + time.seconds+ ' : ' + time.milliseconds%1000;
+	return result.innerText = time.minutes + ' : ' + time.seconds+ ' : ' + time.milliseconds;
 }
 
 function timeDifference(startTime, endTime){
@@ -94,7 +97,54 @@ function timeDifference(startTime, endTime){
 	return difference; 
 }
 
-
-
 </script>
 
+<style>
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('digital-7.ttf');
+}
+
+body{
+ font-family:'digital-clock-font';
+ src: url('digital-7.ttf');
+ font-size: 2.5em;
+ background-color: #282a34;
+ color: white;
+}
+
+h2 {
+	text-align: center;
+}
+
+.container {
+	width: 50%;
+	margin: 0 auto;
+	border: 2px solid black;
+	margin-top: 20%;
+	position: relative;
+	background-color: #72717b;
+}
+
+.result {
+	position: relative;
+	left: 35%;
+	margin-bottom: 0;
+}
+
+.buttonContainer {
+	background-color: #3d8be4;
+	text-align: center;
+	margin-bottom: 75px;
+	margin-top: 25px;
+	padding: 5px;
+}
+
+.buttonContainer button {
+	background-color: #282a34;
+	border: none;
+	padding: 15px;
+	color: white;
+	cursor: pointer;
+}
+</style>
