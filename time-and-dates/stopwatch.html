@@ -6,26 +6,27 @@
 	<div class='buttonContainer'>
 		<button class='startButton'>Start</button>
 		<button class='stopButton'>Stop</button>
-		<button class='resetButton'>Reset</button>
 	</div>
 
 </div>
 <script>
+//selectors
 var startButton = document.querySelector('.startButton');
 var stopButton = document.querySelector('.stopButton');
-var resetButton = document.querySelector('.resetButton');
-
 var result = document.querySelector('.result');
+
+
+//timer state
 var startTime = false;
 
 //timeObject
 var timeWarp = {
-	startTime: false,
 	startCounter: false,
-	baseTime: 0
 }
 
-//convert milliseconds to seconds, minutes or hours
+var baseTime = null;
+
+//convert milliseconds 
 function convertTime(milliseconds){
 	var time = {
 		milliseconds: (milliseconds.toFixed(0)%1000),
@@ -34,10 +35,8 @@ function convertTime(milliseconds){
 		// hours: (milliseconds/(1000 * 60 * 60)).toFixed(1),
 		// days: (milliseconds/(1000 * 60 * 60 * 24)).toFixed(1)
 	};
-
 	return time; 
 }
-
 
 //Event Listeners for start / stop button
 startButton.addEventListener('click', function(){
@@ -51,12 +50,6 @@ stopButton.addEventListener('click', function(){
 	startTime = false;
 });
 
-resetButton.addEventListener('click', function(){
-	console.log('reset');
-	startTime = false;
-})
-
-
 function updateTime(time){
 
 	var endTime = Date.now();
@@ -66,18 +59,19 @@ function updateTime(time){
 
 	if(!timeWarp.startCounter){
 		timeWarp.startCounter = true
-		timeWarp.baseTime = Date.now();
-	}
+		baseTime = Date.now();
+	} 
 
-	if(startTime){
+if(startTime){
 		setTimeout(function(){
-			difference = timeDifference(timeWarp.baseTime, endTime);
+
+			difference = timeDifference(baseTime, endTime);
 			convertedDifference = convertTime(difference);
 
-			seconds = convertedDifference.seconds;
-			minutes = convertedDifference.minutes;
-			milliseconds = convertedDifference.milliseconds;
-			
+			var seconds = convertedDifference.seconds;
+			var minutes = convertedDifference.minutes;
+			var milliseconds = convertedDifference.milliseconds;
+
 			console.log(convertedDifference);
 			printTimeResult(convertedDifference)
 			updateTime();
@@ -88,7 +82,7 @@ function updateTime(time){
 }
 
 function printTimeResult(time){
-	return result.innerText = time.minutes + ' : ' + time.seconds+ ' : ' + time.milliseconds;
+	return result.innerText = time.minutes + ' : ' + time.seconds + ' : ' + time.milliseconds;
 }
 
 function timeDifference(startTime, endTime){
