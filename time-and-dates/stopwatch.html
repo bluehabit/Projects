@@ -1,5 +1,5 @@
 <div class='container'>
-	<h2>Stop-Watch X3</h2>
+	<h2>Stop-Watch X4</h2>
 
 	<p class='result'>0 : 0 : 00</p>
 
@@ -75,19 +75,14 @@ var pauseButton = document.querySelector('.pauseButton');
 var result = document.querySelector('.result');
 
 //timer state
-// var startTime = false;
 var pause = false;
+var reset = false;
 
 var baseTime;
 var difference;
 var cachedDifference; 
 
-//Event Listeners for start / stop button
 startButton.addEventListener('click', function(){
-	// startTime = !startTime;
-	// startButton.disabled = true;
-	// startButton.classList.toggle('disable')
-
 	if(!pause){
 		baseTime = Date.now();
 	} else {
@@ -99,41 +94,41 @@ startButton.addEventListener('click', function(){
 
 pauseButton.addEventListener('click', function(){
 	pause = true;
-	console.log('pause is ' + pause);
+	if(pause) startButton.innerText = 'Resume';
 })
 
 resetButton.addEventListener('click', function(){
-	// startTime = false;
+	reset = true;
+	if(pause){
+		reset = false;
+		pause = false;
+		result.innerText ='0 : 0 : 00'
+	}
+	startButton.innerText = 'Start';
 });
 
 function updateTime(time){
 	var endTime = Date.now();
+	setTimeout(function(){
+		if(reset){
+			reset = false; 
+			return result.innerText ='0 : 0 : 00';
+		}
 
-	// if(startTime){
-		setTimeout(function(){
+		if(pause) return; 
 
-			difference = timeDifference(baseTime, endTime);
-			converteddifference = convertTime(difference);
+		difference = timeDifference(baseTime, endTime);
+		converteddifference = convertTime(difference);
 
-			var seconds = converteddifference.seconds;
-			var minutes = converteddifference.minutes;
-			var milliseconds = converteddifference.milliseconds;
+		var seconds = converteddifference.seconds;
+		var minutes = converteddifference.minutes;
+		var milliseconds = converteddifference.milliseconds;
 
-			if(pause){
-				return console.log(difference);
-			}
+		cachedDifference = difference; 
 
-			//raw ms delta
-			cachedDifference = difference; 
-			console.log(cachedDifference);
-
-			printTimeResult(converteddifference);
-			updateTime();
-		}, 3);
-	// } 
-	// else {
-	// 	result.innerText='0 : 0 : 00';
-	// }
+		printTimeResult(converteddifference);
+		updateTime();
+	}, 3);
 }
 
 function printTimeResult(time){
