@@ -1,1 +1,17 @@
+<p class='result'>Result here</p>
 
+<script>
+var timeInterval = setInterval(getTime, 1000);
+var result = document.querySelector('.result');
+
+function getTime(){
+	var clockTime = new Date;
+	var seconds = clockTime.getSeconds();
+	var minutes = clockTime.getMinutes();
+	var hours = clockTime.getHours();
+
+	return result.innerText = hours + ' : ' + minutes + ' : ' + seconds;
+}
+
+
+</script>
