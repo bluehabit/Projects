@@ -1,0 +1,128 @@
+<div class='clock'>
+	<div class='secondHand beez'></div>
+	<div class='minuteHand'></div>
+	<div class='hourHand'></div>
+</div>
+
+
+<p class='result'>Result here</p>
+
+<script>
+var timeInterval = setInterval(getTime, 1000);
+var result = document.querySelector('.result');
+
+var secondHand = document.querySelector('.secondHand');
+var minuteHand = document.querySelector('.minuteHand');
+var hourHand = document.querySelector('.hourHand');
+
+function getTime(){
+	var clockTime = new Date;
+	var seconds = clockTime.getSeconds();
+	var minutes = clockTime.getMinutes();
+	var hours = clockTime.getHours();
+
+	var convertHours = militaryTime(hours);
+	console.log(convertHours + ' is converted hours');
+
+	var convertedSeconds = (6 * seconds) - 90; 
+	secondHand.style.transform = `rotate(${convertedSeconds}deg)`;
+
+	var convertedMinutes = (30 * convertHours) - 90; 
+	minuteHand.style.transform = `rotate(${convertedMinutes}deg)`;
+
+	return result.innerText = hours + ' : ' + minutes + ' : ' + seconds;
+}
+
+
+//Call the function immediately, otherwise there is a 1sec delay
+//where 'result here' will show up 
+getTime();
+
+
+function militaryTime(time){
+	var time = time;
+
+	if(time <= 12){
+		return time;
+	} else {
+		switch(time){
+			case 13: 
+				time = 1;
+				break;
+			case 14: 
+				time = 2;
+				break;
+			case 15:
+				time = 3;
+				break;
+			case 16:
+				time = 4;
+				break;
+			case 17:
+				time = 5;
+				break;
+			case 18:
+				time = 6;
+				break;
+			case 19:
+				time = 7;
+				break;
+			case 20:
+				time = 8;
+				break;
+			case 21:
+				time = 9;
+				break;
+			case 22:
+				time = 10;
+				break;
+			case 23:
+				time = 11;
+				break;
+			case 24:
+				time = 12;
+				break;
+		}
+	}	
+		return time;
+	}
+
+</script>
+
+<style>
+html {
+	background-color: #3e3d41;
+}
+
+.clock {
+	position: relative;
+	width: 325px;
+	height: 325px;
+	border-radius: 50%;
+	border: 2px solid white;
+	margin: 0 auto;
+}	
+
+.secondHand {
+	position: relative;
+	width: 155px;
+	height: 5px;
+	background-color: blue;
+	top: 162.5px;
+	left: 162.5px;
+	transform: rotate(-90deg);
+	transform-origin: 0% 0%;
+}
+
+.minuteHand {
+	position: relative;
+	width: 115px;
+	height: 5px;
+	background-color: red;
+	top: 162.5px;
+	left: 162.5px;
+	transform: rotate(-90deg);
+	transform-origin: 0% 0%;
+	transform: rotate(120deg);
+}
+</style>
