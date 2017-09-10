@@ -2,10 +2,11 @@
 	<div class='secondHand beez'></div>
 	<div class='minuteHand'></div>
 	<div class='hourHand'></div>
+	<div class='roundMiddle'></div>
 </div>
 
 
-<p class='result'>Result here</p>
+<p class='result'>Result here<span></span></p>
 
 <script>
 var timeInterval = setInterval(getTime, 1000);
@@ -38,7 +39,19 @@ function getTime(){
 	var convertedHours = (30 * convertHours) - 90; 
 	hourHand.style.transform = `rotate(${convertedHours}deg)`;
 
-	return result.innerText = hours + ' : ' + minutes + ' : ' + seconds;
+	seconds = seconds.toString();
+	if (seconds.length === 1) {
+	  seconds = '0' + seconds;
+	}
+
+	minutes = minutes.toString();
+	if (minutes.length === 1){
+		minutes = '0' + minutes;
+	}
+
+	console.log(seconds);
+
+	return result.textContent = convertHours + ' : ' + minutes + ' : ' + seconds;
 }
 
 
@@ -52,47 +65,10 @@ function militaryTime(time){
 	if(time <= 12){
 		return time;
 	} else {
-		switch(time){
-			case 13: 
-				time = 1;
-				break;
-			case 14: 
-				time = 2;
-				break;
-			case 15:
-				time = 3;
-				break;
-			case 16:
-				time = 4;
-				break;
-			case 17:
-				time = 5;
-				break;
-			case 18:
-				time = 6;
-				break;
-			case 19:
-				time = 7;
-				break;
-			case 20:
-				time = 8;
-				break;
-			case 21:
-				time = 9;
-				break;
-			case 22:
-				time = 10;
-				break;
-			case 23:
-				time = 11;
-				break;
-			case 24:
-				time = 12;
-				break;
-		}
-	}	
+		time = time%12
 		return time;
-	}
+	}	
+}
 
 </script>
 
@@ -113,6 +89,7 @@ body{
 }
 
 * {
+  /*anti-aliasing for text*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -141,7 +118,7 @@ html {
 	box-shadow: inset -10px -8px 23px -4px rgba(28,23,28,0.32);
 }	
 
-.secondHand, .minuteHand {
+.secondHand, .minuteHand, .roundMiddle {
 	box-shadow: 2px 7px 5px 0px rgba(0,0,0,0.22);
 }
 
@@ -149,7 +126,7 @@ html {
 	box-shadow: 2px -5px 5px 0px rgba(0,0,0,0.22);
 }
 
-.minuteHand, .hourHand {
+.minuteHand, .hourHand, .roundMiddle {
 	background-color: #221e20;
 }
 
@@ -166,6 +143,7 @@ html {
 	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
+
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
@@ -181,6 +159,7 @@ html {
 	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
+
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
@@ -196,11 +175,22 @@ html {
 	left: 162.5px;;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
+
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
 	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
+}
+
+.roundMiddle {
+	position: relative;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	left: 149.5px;
+	top: 140.5px;
+	z-index: 400;
 }
 
 .transition {
