@@ -126,17 +126,30 @@ html {
 	width: 325px;
 	height: 325px;
 	border-radius: 50%;
+	background-color: rgba(232, 32, 131, .85);
 	border: 3.5px solid white;
 	margin: 0 auto;
 	margin-top: 12%;
 }	
 
+.secondHand, .minuteHand {
+	box-shadow: 2px 7px 5px 0px rgba(0,0,0,0.22);
+}
+
+.hourHand {
+	box-shadow: 2px -5px 5px 0px rgba(0,0,0,0.22);
+}
+
+.minuteHand, .hourHand {
+	background-color: #221e20;
+}
+
 .secondHand {
 	position: relative;
 	width: 155px;
 	height: 2.5px;
-	background-color: blue;
-	top: 162.5px;
+	background-color: #292cc4;
+	top: 167.5px;
 	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
@@ -144,20 +157,14 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
-}
-
-.secondHand::before{
-	position: relative;
-	width: 35px;
-	height: 35px;
-	background-color: red;
+	transition: all .5s ease;
+	animation: neonGlow 650ms ease;
 }
 
 .minuteHand {
 	position: relative;
 	width: 125px;
 	height: 5px;
-	background-color: black;
 	top: 162.5px;
 	left: 162.5px;
 	transform: rotate(-90deg);
@@ -166,13 +173,14 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	transition: all .5s ease;
+	animation: neonGlow 650ms ease;
 }
 
 .hourHand {
 	position: relative;
 	width: 80px;
 	height: 5px;
-	background-color: black;
 	top: 162.5px;
 	left: 162.5px;;
 	transform: rotate(-90deg);
@@ -181,5 +189,17 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	transition: all .5s ease;
+	animation: neonGlow 650ms ease;
+}
+
+@keyframes neonGlow {
+	0%{
+		filter: blur(0px);
+	}
+
+	100%{
+		filter: blur(2px);
+	}
 }
 </style>
