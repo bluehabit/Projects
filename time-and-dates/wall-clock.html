@@ -26,6 +26,12 @@ function getTime(){
 	var convertedSeconds = (6 * seconds) - 90; 
 	secondHand.style.transform = `rotate(${convertedSeconds}deg)`;
 
+	if(convertedSeconds !== -90){
+		secondHand.classList.add('transition');
+	} else {
+		secondHand.classList.remove('transition');
+	}
+
 	var convertedMinutes = (6 * minutes) - 90; 
 	minuteHand.style.transform = `rotate(${convertedMinutes}deg)`;
 
@@ -36,7 +42,7 @@ function getTime(){
 }
 
 
-//Call the function immediately, otherwise there is a 1sec delay where 'result here' will show up 
+// Call the function immediately, otherwise there is a 1sec delay where 'result here' will show up 
 getTime();
 
 
@@ -120,7 +126,7 @@ html {
 	color: white;
 	font-size: 1.8em;
 	transition: all .2s ease;
-	animation: neonGlow 1.52s ease infinite alternate;
+	animation: neonGlow 2.3s ease infinite alternate;
 }
 
 .clock {
@@ -163,7 +169,6 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
-	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
 .minuteHand {
@@ -171,13 +176,17 @@ html {
 	width: 125px;
 	height: 5px;
 	top: 162.5px;
-	left: 162.5px;
+	left: 167px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
+}
+
+.transition {
 	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
@@ -202,7 +211,7 @@ html {
 	}
 
 	to {
-		
+		text-shadow: 0 0 3px #fff, 0 0 4px #fff, 0 0 7px #fff, 0 0 18px #ef1586, 0 0 28px #ef1586, 0 0 68px #ef1586;
 	}
 }
 
