@@ -119,6 +119,8 @@ html {
 	text-align: center;
 	color: white;
 	font-size: 1.8em;
+	transition: all .2s ease;
+	animation: neonGlow 3.5s ease infinite;
 }
 
 .clock {
@@ -144,6 +146,10 @@ html {
 	background-color: #221e20;
 }
 
+
+/*!!!!! OLD ANIMATION EASE*/
+/*transition: all .5s ease;*/
+
 .secondHand {
 	position: relative;
 	width: 155px;
@@ -157,8 +163,7 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
-	transition: all .5s ease;
-	animation: neonGlow 650ms ease;
+	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
 .minuteHand {
@@ -173,8 +178,7 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
-	transition: all .5s ease;
-	animation: neonGlow 650ms ease;
+	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
 .hourHand {
@@ -189,17 +193,23 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
-	transition: all .5s ease;
-	animation: neonGlow 650ms ease;
+	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
 @keyframes neonGlow {
 	0%{
 		filter: blur(0px);
+		opacity: 1;
+	}
+
+	75%{
+		filter: blur(8px);
+		opacity: .85;
 	}
 
 	100%{
-		filter: blur(2px);
+		filter: blur(0px);
+		opacity: 1;
 	}
 }
 </style>
