@@ -36,8 +36,7 @@ function getTime(){
 }
 
 
-//Call the function immediately, otherwise there is a 1sec delay
-//where 'result here' will show up 
+//Call the function immediately, otherwise there is a 1sec delay where 'result here' will show up 
 getTime();
 
 
@@ -92,6 +91,26 @@ function militaryTime(time){
 </script>
 
 <style>
+
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('digital-7.ttf');
+}
+
+body{
+ font-family:'digital-clock-font';
+ src: url('digital-7.ttf');
+ font-size: 2.5em;
+ background-color: #282a34;
+ color: white;
+ padding: 5px;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html {
 	background-color: #3e3d41;
 }
@@ -107,40 +126,60 @@ html {
 	width: 325px;
 	height: 325px;
 	border-radius: 50%;
-	border: 2px solid white;
+	border: 3.5px solid white;
 	margin: 0 auto;
+	margin-top: 12%;
 }	
 
 .secondHand {
 	position: relative;
 	width: 155px;
-	height: 5px;
+	height: 2.5px;
 	background-color: blue;
 	top: 162.5px;
 	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+.secondHand::before{
+	position: relative;
+	width: 35px;
+	height: 35px;
+	background-color: red;
 }
 
 .minuteHand {
 	position: relative;
-	width: 115px;
+	width: 125px;
 	height: 5px;
 	background-color: black;
 	top: 162.5px;
 	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .hourHand {
 	position: relative;
 	width: 80px;
 	height: 5px;
-	background-color: red;
+	background-color: black;
 	top: 162.5px;
-	left: 162.5px;
+	left: 162.5px;;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 </style>
