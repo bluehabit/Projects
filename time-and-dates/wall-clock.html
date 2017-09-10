@@ -120,7 +120,7 @@ html {
 	color: white;
 	font-size: 1.8em;
 	transition: all .2s ease;
-	animation: neonGlow 3.5s ease infinite;
+	animation: neonGlow 1.52s ease infinite alternate;
 }
 
 .clock {
@@ -129,7 +129,7 @@ html {
 	height: 325px;
 	border-radius: 50%;
 	background-color: rgba(232, 32, 131, .85);
-	border: 3.5px solid white;
+	border: 5px solid white;
 	margin: 0 auto;
 	margin-top: 12%;
 }	
@@ -197,19 +197,13 @@ html {
 }
 
 @keyframes neonGlow {
-	0%{
-		filter: blur(0px);
-		opacity: 1;
+	from {
+		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ef1586, 0 0 75px #ef1586, 0 0 150px #ef1586;
 	}
 
-	75%{
-		filter: blur(8px);
-		opacity: .85;
-	}
-
-	100%{
-		filter: blur(0px);
-		opacity: 1;
+	to {
+		
 	}
 }
+
 </style>
