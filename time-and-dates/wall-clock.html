@@ -138,6 +138,7 @@ html {
 	border: 5px solid white;
 	margin: 0 auto;
 	margin-top: 12%;
+	box-shadow: inset -10px -8px 23px -4px rgba(28,23,28,0.32);
 }	
 
 .secondHand, .minuteHand {
@@ -161,7 +162,7 @@ html {
 	width: 155px;
 	height: 2.5px;
 	background-color: #292cc4;
-	top: 167.5px;
+	top: 162.5px;
 	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
@@ -169,6 +170,7 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	z-index: 200;
 }
 
 .minuteHand {
@@ -176,17 +178,13 @@ html {
 	width: 125px;
 	height: 5px;
 	top: 162.5px;
-	left: 167px;
+	left: 162.5px;
 	transform: rotate(-90deg);
 	transform-origin: 0% 0%;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
-	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
-}
-
-.transition {
 	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
@@ -202,6 +200,10 @@ html {
 	border-bottom-right-radius: 6px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
+}
+
+.transition {
 	transition: all .15s cubic-bezier(.27,-0.81,.86,2.14);
 }
 
