@@ -1,0 +1,49 @@
+
+<h2>Swapping with .replaceChild()</h2>
+<body>
+	<div>
+		<span>foo bar</span>
+	</div>
+
+	<p>some text</p>
+
+	<p id="childSpan">replace me</p>
+
+	<div>
+		<p>more text</p>
+	</div>
+
+	<ul>
+		<li><a href='#'>item1</a></li>
+		<li>item2</li>
+	</ul>
+
+	<ol>
+		<li>red</li>
+		<li>blue</li>
+		<li>green</li>
+	</ol>
+</body>
+
+<script>
+
+//change the element type below, currently set to SPAN
+//add the ID 'childSpan' to the element you want to swap
+
+//we replace the id childSpan with newSpan
+
+var sp1 = document.createElement('span')
+sp1.id = 'newSpan'
+sp1.textContent = 'This is the new span'
+
+var sp2 = document.getElementById('childSpan');
+var parent = sp2.parentNode;
+
+parent.replaceChild(sp1, sp2);
+</script>
+
+<style>
+#newSpan {
+	color: red;
+}
+</style>
