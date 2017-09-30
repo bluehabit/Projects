@@ -7,7 +7,7 @@
 
 	<p>some text</p>
 
-	<p id="childSpan">replace me</p>
+	<p id="replaceMe">replace me</p>
 
 	<div>
 		<p>more text</p>
@@ -28,28 +28,28 @@
 <script>
 
 //change the element type below, currently set to SPAN
-//add the ID 'childSpan' to the element you want to swap
+//add the ID 'replaceMe' to the element you want to swap
 
-//we replace the id childSpan with newSpan
+//we replace the id replaceMe with newSpan
 
-//SP1
-// create an empty element node
+var a = document.querySelector('ol')
+
 var sp1 = document.createElement('span')
 sp1.id = 'newSpan'
 sp1.textContent = 'This is the new span'
+//creates <span id="newSpan">This is the new span</span>
 
-//SP2
-// build a reference to the existing node to be replaced
-var sp2 = document.getElementById('childSpan');
+var sp2 = document.getElementById('replaceMe');
 var parent = sp2.parentNode;
 
-// replace existing node sp2 with the new span element sp1
-//get the PARENT of the ELEMENT that is getting REPLACED
 parent.replaceChild(sp1, sp2);
-</script>
 
-<style>
-#newSpan {
-	color: red;
-}
-</style>
+// function replaceElement(e1, e2){
+// 	var e1NodeName = e1.nodeName;
+// 	var newE1 = document.createElement(e1NodeName);
+// 	newE1.id = 'newElement';
+// 	newE1.textContent = e1.textContent;
+
+// 	var newE2 = e2;
+// 	e2.id = 'replaceMe';
+// }
