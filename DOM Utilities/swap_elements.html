@@ -32,13 +32,18 @@
 
 //we replace the id childSpan with newSpan
 
+//SP1
+// create an empty element node
 var sp1 = document.createElement('span')
 sp1.id = 'newSpan'
 sp1.textContent = 'This is the new span'
 
+//SP2
+// build a reference to the existing node to be replaced
 var sp2 = document.getElementById('childSpan');
 var parent = sp2.parentNode;
 
+// replace existing node sp2 with the new span element sp1
 parent.replaceChild(sp1, sp2);
 </script>
 
