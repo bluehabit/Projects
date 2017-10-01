@@ -19,6 +19,21 @@
 		<li>item2</li>
 	</ul>
 
+	<span class='yellow'>
+		<aside>
+			<div class='orange'>
+				<div id='getMyChildren'>
+					<span class='blue'>im a span</span>	
+					<span class='blue'>im also a span</span>
+					<span>span no 3<p>some text</p></span>
+					<li>item1</li>
+					<li>item2</li>
+					<li>item3</li>
+				</div>
+			</div>
+		</aside>
+	</span>
+
 	<p>
 		<span> This is another span</span>
 	</p>
@@ -28,9 +43,12 @@
 <script>
 
 
-var a = document.querySelector('div #doit')
-var doIt = document.getElementById('doit');
-var science = document.getElementById('science');
+function getSiblingsBySelector(refElement, selector){
+	var refElement = refElement;
+	var kids = refElement.children;
+	var queryAll = refElement.querySelectorAll(`${selector}`);
+	return queryAll; 
+}
 
 function getAncestorBySelector(refNode, selector){
 	var queryAll = document.querySelectorAll(`${selector}`);
@@ -58,6 +76,7 @@ function swapElements(e1, e2){
 	e2Parent.appendChild(e1)
 
 	return true;
+	//use appendChild its much easier than replaceChild
 }
 
 function removeAll(cssSelector){
@@ -78,12 +97,7 @@ function insertAfter(newNode, referenceNode) {
 
 var forScience = document.getElementById('science');
 var doIt = document.getElementById('doit');
-
-// var myDog =  document.createElement('p');
-// myDog.id = 'red';
-// myDog.textContent = 'My dog Spot';
-
-
+var momElement = document.getElementById('getMyChildren');
 
 </script>
 
