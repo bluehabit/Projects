@@ -1,0 +1,101 @@
+
+<h2>Swapping Elements with .replaceChild()</h2>
+<body>
+	<div>
+		<span id='a'>foo bar</span>
+	</div>
+
+	<p id='science'>FOR SCIENCE</p>
+
+	<p id='replaceme'>replace me</p>
+
+	<div>
+		<p id='doit'>DO IT</p>
+		<span>im a span</span>
+	</div>
+
+	<ul>
+		<li><a href='#'>item1</a></li>
+		<li>item2</li>
+	</ul>
+
+	<p>
+		<span> This is another span</span>
+	</p>
+
+</body>
+
+<script>
+
+function swapElements(e1, e2){
+	var e1Parent = e1.parentNode;
+	var e2Parent = e2.parentNode;
+
+	e1Parent.appendChild(e2)
+	e2Parent.appendChild(e1)
+	//e1 and e2 are the ORIGINAL dom elements
+	//we are moving them on the DOM
+
+	return true;
+}
+
+function removeAll(cssSelector){
+	var query = document.querySelectorAll(`${cssSelector}`);
+	var removed = [];
+
+	query.forEach(function(item){
+		removed.push(item);
+		item.remove();
+	});
+
+	return removed;
+}
+
+function insertAfter(nodeInsert, existingNode){
+
+}
+
+//https://stackoverflow.com/questions/4793604/how-to-insert-an-element-after-another-element-in-javascript-without-using-a-lib
+
+
+
+//How this works
+var forScience = document.getElementById('science');
+var doIt = document.getElementById('doit');
+var replaceme = document.getElementById('replaceme');
+
+var myDog =  document.createElement('p');
+myDog.id = 'red';
+myDog.textContent = 'My dog Spot';
+//up until this point all it is doing is working like vanilla
+//insertBefore, all we do is modify the 2nd parameter so it
+//insertsBefore the NEXT sibling, which will put it in FRONT of
+//the target element
+
+var myParent = forScience.parentNode
+myParent.insertBefore(myDog, forScience.nextElementSibling);
+
+//now we can turn it into a function
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+
+
+</script>
+
+<style>
+#science {
+	color: red;
+	font-weight: bold;
+}
+
+#doit {
+	font-weight: bold;
+}
+
+#red {
+	color: red;
+}
+
+</style>
