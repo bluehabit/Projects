@@ -80,18 +80,17 @@
 function replaceElement(e1, e2){
 	var element1 = e1.cloneNode();
 	element1.textContent = e1.textContent;
+	console.log(element1.parentNode)
 
 	var element2 = e2;
 	var e2Parent = element2.parentNode;
-	console.log(e2Parent);
-
+	console.log(e2Parent)
+	
 	e2Parent.replaceChild(element1, element2);
 }	
 
 var myP = document.querySelector('#paragraph');
 var science = document.querySelector('#science');
-
-//﻿replaceElement(myP, science);
 
 </script>
 
