@@ -7,7 +7,7 @@
 
 	<p id='science'>FOR SCIENCE</p>
 
-	<p>replace me</p>
+	<p id='replaceme'>replace me</p>
 
 	<div>
 		<p id='doit'>DO IT</p>
@@ -27,43 +27,17 @@
 
 <script>
 
-function replaceElement(e1, e2){
+function swapElements(e1, e2){
+	var e1Parent = e1.parentNode;
+	var e2Parent = e2.parentNode;
 
-try {
-	var element1Clone = e1.cloneNode();
-	element1Clone.textContent = e1.textContent;
+	e1Parent.appendChild(e2)
+	e2Parent.appendChild(e1)
+	//e1 and e2 are the ORIGINAL dom elements
+	//we are moving them on the DOM
 
-	var element2DOM = e2;
-	var e2Parent = element2DOM.parentNode;
-	console.log(e2Parent)
-
-	e2Parent.replaceChild(element1Clone, element2DOM);
-
-	/////
-
-	var element2Clone = e2.cloneNode();
-	element2Clone.textContent = e2.textContent;
-
-	var element1DOM = e1;
-	var e1Parent = element1DOM.parentNode;
-	console.log(e1Parent)
-
-	e1Parent.replaceChild(element2Clone, element1DOM);
-
-
-
-	return true
-} catch(e){
-	console.log(e)
-	return false;
+	return true;
 }
-}	
-
-var doIt = document.getElementById('doit');
-var forScience = document.getElementById('science');
-
-//﻿replaceElement(doIt, forScience);
-
 
 function removeAll(cssSelector){
 	var query = document.querySelectorAll(`${cssSelector}`);
@@ -81,9 +55,9 @@ function insertAfter(nodeInsert, existingNode){
 
 }
 
-// var myDog =  document.createElement('p');
-// myDog.id = 'red';
-// myDog.textContent = 'My dog Spot';
+var myDog =  document.createElement('p');
+myDog.id = 'red';
+myDog.textContent = 'My dog Spot';
 
 // var parront = forScience.parentNode
 
@@ -91,6 +65,13 @@ function insertAfter(nodeInsert, existingNode){
 
 //https://stackoverflow.com/questions/4793604/how-to-insert-an-element-after-another-element-in-javascript-without-using-a-lib
 
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+var forScience = document.getElementById('science');
+var doIt = document.getElementById('doit');
+var replaceme = document.getElementById('replaceme');
 
 </script>
 
