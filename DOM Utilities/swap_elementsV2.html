@@ -80,11 +80,8 @@
 function replaceElement(e1, e2){
 	var element1 = e1.cloneNode();
 	element1.textContent = e1.textContent;
-	element1.id = 'newElement';
 	console.log(element1);
 
-
-	e2.id = 'replaceMe';
 	var element2Parent = e2.parentNode;
 
 	element2Parent.replaceChild(element1, e2);
@@ -92,6 +89,7 @@ function replaceElement(e1, e2){
 
 var myP = document.querySelector('#paragraph');
 var science = document.querySelector('#science');
+
 
 //﻿replaceElement(myP, science);
 
