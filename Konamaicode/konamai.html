@@ -1,0 +1,54 @@
+<h2>Up, Up, Down, Down, B, A, B, A</h2>
+<h3></h3>
+<button>Try it</button>
+
+<script>
+
+// display a timer add this as well
+var correctOrder = [65, 65, 65];
+var userOrder = [];
+
+var gameSound = new Audio('btoad.mp3'); 
+var result = document.querySelector('h3');
+var timeLeft = true;
+
+var button = document.querySelector('button');
+
+window.addEventListener('keyup', function(e){
+	if(!timeLeft){
+		timeLeft = true;
+		userOrder = [];
+		console.log('inside if loop')
+	}
+
+	userOrder.push(e.keyCode);
+
+	if(userOrder[0] === correctOrder[0]){
+		timeOut(5000);
+	}
+	
+
+	for(var i = 0; i < userOrder.length; i++){
+		if(userOrder[i] === correctOrder[i]){
+		} else {
+			userOrder = [];
+		}
+	}
+
+	if(userOrder.length === correctOrder.length && timeLeft){
+		console.log('winner')
+		gameSound.play();
+		result.textContent = 'You Win!'
+	}
+
+	console.log(userOrder);
+});
+
+function timeOut(inputTime){
+	setTimeout(function(){ 
+	timeLeft =  false; 
+	console.log('countdown ended')
+	}, inputTime);
+}
+
+
