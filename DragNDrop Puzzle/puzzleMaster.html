@@ -1,0 +1,151 @@
+<div class='puzzleContainer'>
+	<img class='puzzleSolved' src='_Puzzle_solved.png'>
+	<img class='puzzleUnsolved hidden' src='_Puzzle_bg_unsolved.png'>
+
+	<button class='startPuzzle'>Begin</button>
+
+		<div class='difficulty'>
+		<h2>Select Difficulty</h2>
+		<button class='uv'>Novice</button>
+		<button class='nightmare'>Nightmare</button>
+	</div>
+</div>
+
+<style>
+	@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+	@font-face {
+  	font-family: 'Doom';
+  	src: url('AmazDooMLeft.ttf'); 
+	}
+
+
+	html {
+		background-color: #2a2a2a;
+		font-family: 'Orbitron', sans-serif;
+		font-size: 1.2em;
+	}
+
+	.puzzleSolved, .puzzleUnsolved {
+		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	.puzzleContainer {
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 10%;
+	}	
+
+	.startPuzzle {
+		display: block;
+		width: 25%;
+		margin: 0 auto;
+		margin-top: 5px;
+		opacity: .75;
+		text-transform: uppercase;
+	}
+
+	.difficulty > button {
+		display: block;
+		width: 55%;
+		margin: 0 auto;
+		margin-bottom: 27px;
+	}
+
+	.difficulty {
+		width: 50%;
+		margin: 0 auto;
+		position: relative;
+		bottom: 485px ;
+	}
+
+	button {
+		cursor: pointer;
+		font-family: 'Orbitron', sans-serif;
+		font-size: .89em;
+		transition: all .2s ease;
+		border: 2px solid white;
+		opacity: .85;
+		padding: 21px;
+	}
+
+	button:hover {
+		opacity: 1;
+		background-color: #ec1d88;
+	}
+
+	button:focus {
+		outline:0;
+	}
+
+	h2 {
+		color: white;
+		text-align: center;
+	}
+</style>
+
+<script>
+	var startButton = document.querySelector('.startPuzzle');
+	var puzzleSolved = document.querySelector('.puzzleSolved');
+	var puzzleUnsolved = document.querySelector('.puzzleUnsolved');
+	var nightmareMode = false
+
+	var pistol = new Audio('sounds/dspistol.wav');
+	var vault = new Audio('sounds/vault.mp3');
+	var xcom = new Audio('sounds/xcom.mp3');
+
+	var uv = document.querySelector('.uv');
+	var nightmare = document.querySelector('.nightmare');
+
+	var difficultyButtons = document.querySelectorAll('.difficulty > button')
+
+	startButton.addEventListener('click', function(){
+		puzzleSolved.classList.add('hidden');
+		puzzleUnsolved.classList.remove('hidden');
+	});
+
+	difficultyButtons.forEach(function(button){
+		button.addEventListener('mouseenter', function(){
+			vault.currentTime = 0; //rewind audio element to the start
+			vault.play();
+		});
+
+		button.addEventListener('click', function(){
+			pistol.currentTime = 0;
+			vault.pause();
+			pistol.play();
+		});
+	});
+
+	nightmare.addEventListener('click', function(){
+		nightmareMode = true;
+		console.log('nightmare mode:', nightmareMode)
+	});
+
+
+
+
+	//if(!nightmare) - add hints etc. 
+
+	//fork lift sound for menu move
+	//glowing skull
+	//pistol shot for select
+	//Ultra Violence
+	//NIGHTMARE
+
+	//mouseenter
+	//mouseleave
+
+
+	function initGame(){
+		//call this at start of game
+		//call again to reset game state	
+	}
+	//programatically set the classes so instead of starting
+	//with one the hidden class, add it to that specific element
+	//that way everytime i restart the board its back to step zero
+</script>
