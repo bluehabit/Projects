@@ -1,13 +1,32 @@
-<div class='puzzleContainer'>
+<div class='mainContainer'>
+
+<div class='puzzleCanvas'>	
 	<img class='puzzleSolved' src='_Puzzle_solved.png'>
-	<img class='puzzleUnsolved hidden' src='_Puzzle_bg_unsolved.png'>
+	<img class='puzzleUnsolved' src='_Puzzle_bg_unsolved.png'>
+</div>
 
 	<button class='startPuzzle'>Begin</button>
 
-		<div class='difficulty'>
+	<div class='difficultyContainer'>
 		<h2>Select Difficulty</h2>
 		<button class='uv'>Novice</button>
 		<button class='nightmare'>Nightmare</button>
+	</div>
+
+	<div class='piecesContainer'>
+	</div>
+
+	<div class='temp'>
+		<img class='shadowed' src='pieces/Group 5.png'>
+		<img class='shadowed' src='pieces/Group 6.png'>
+	<!-- 	<img class='shadowed' src='pieces/Group 7.png'>
+		<img class='shadowed' src='pieces/Group 8.png'>
+		<img class='shadowed' src='pieces/Group 9.png'>
+		<img class='shadowed' src='pieces/Group 10.png'>
+		<img class='shadowed' src='pieces/Group 11.png'>
+		<img class='shadowed' src='pieces/Group 12.png'>
+		<img class='shadowed' src='pieces/Group 13.png'>
+		<img class='shadowed' src='pieces/Group 14.png'> -->
 	</div>
 </div>
 
@@ -19,6 +38,39 @@
   	src: url('AmazDooMLeft.ttf'); 
 	}
 
+	@keyframes fadeIn {
+		from {
+			opacity: 0;`
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeOut {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	img {
+		display: block;
+		margin: auto;
+		max-width: 100%;
+	}
+
+	body {
+		user-select: none;
+	}
+
+/*	.puzzleCanvas img {
+		display: block;
+		margin: auto;
+	}*/
+
 
 	html {
 		background-color: #2a2a2a;
@@ -26,18 +78,37 @@
 		font-size: 1.2em;
 	}
 
-	.puzzleSolved, .puzzleUnsolved {
+	.temp {
+		border: 2px solid blue;
+		height: 600px;
+	}
+
+	.temp img {
+		position: relative;
+	}
+
+	div > img:nth-child(1) {
+		z-index: 10;
+	}
+
+	div > img:nth-child(2) {
+		z-index: 1;
+		bottom: 15px;
+	}
+
+	.puzzleSolved, .puzzleUnsolved, .puzzlePiece {
 		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
 	}
 
-	.hidden {
-		display: none;
+	.puzzleUnsolved {
+		animation: fadeIn 2s ease;
 	}
 
-	.puzzleContainer {
-		width: 80%;
+	.mainContainer {
+		width: 860px;
 		margin: 0 auto;
-		margin-top: 10%;
+		margin-top: 5%;
+		border: 2px solid white;
 	}	
 
 	.startPuzzle {
@@ -49,18 +120,27 @@
 		text-transform: uppercase;
 	}
 
-	.difficulty > button {
+	.difficultyContainer > button {
 		display: block;
 		width: 55%;
 		margin: 0 auto;
 		margin-bottom: 27px;
 	}
 
-	.difficulty {
+	.difficultyContainer {
 		width: 50%;
 		margin: 0 auto;
 		position: relative;
 		bottom: 485px ;
+	}
+
+	.piecesContainer {
+		/*background-color: white;*/
+		border: 2px groove white;
+		width: 820px;
+		height: 325px;
+		margin: 0 auto;
+		margin-top: 5px;
 	}
 
 	button {
@@ -86,66 +166,138 @@
 		color: white;
 		text-align: center;
 	}
+
+	.hidden {
+		display: none;
+	}
+
+	.shadowed {
+    	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.5));
+    	position: relative;
+	}
+
 </style>
 
 <script>
-	var startButton = document.querySelector('.startPuzzle');
-	var puzzleSolved = document.querySelector('.puzzleSolved');
-	var puzzleUnsolved = document.querySelector('.puzzleUnsolved');
-	var nightmareMode = false
+var startPuzzle = document.querySelector('.startPuzzle'),
+puzzleSolved = document.querySelector('.puzzleSolved'),
+puzzleUnsolved = document.querySelector('.puzzleUnsolved'),
+difficultyContainer = document.querySelector('.difficultyContainer'),
+piecesContainer = document.querySelector('.piecesContainer'),
+heart = document.querySelectorAll('.temp > img'),
+nightmareMode;
 
-	var pistol = new Audio('sounds/dspistol.wav');
-	var vault = new Audio('sounds/vault.mp3');
-	var xcom = new Audio('sounds/xcom.mp3');
+var pistol = new Audio('sounds/dspistol.wav'),
+vault = new Audio('sounds/vault.mp3'),
+xcom = new Audio('sounds/xcom.mp3');
 
-	var uv = document.querySelector('.uv');
-	var nightmare = document.querySelector('.nightmare');
+var uv = document.querySelector('.uv'),
+nightmare = document.querySelector('.nightmare');
 
-	var difficultyButtons = document.querySelectorAll('.difficulty > button')
+var difficultyButtons = document.querySelectorAll('.difficultyContainer > button')
 
-	startButton.addEventListener('click', function(){
-		puzzleSolved.classList.add('hidden');
-		puzzleUnsolved.classList.remove('hidden');
+startPuzzle.addEventListener('click', function(){
+	puzzleSolved.classList.add('hidden');
+	puzzleUnsolved.classList.remove('hidden');
+	piecesContainer.classList.remove('hidden');
+	generatePuzzlePieces();
+});
+
+difficultyButtons.forEach(function(button){
+	button.addEventListener('mouseenter', function(){
+		vault.currentTime = 0; //rewind audio element to the start
+		vault.play();
 	});
 
-	difficultyButtons.forEach(function(button){
-		button.addEventListener('mouseenter', function(){
-			vault.currentTime = 0; //rewind audio element to the start
-			vault.play();
-		});
+	button.addEventListener('click', function(){
+		pistol.currentTime = 0;
+		vault.pause();
+		pistol.play();
+		startPuzzle.classList.remove('hidden');
+		difficultyContainer.classList.add('hidden');
+	});
+});
 
-		button.addEventListener('click', function(){
-			pistol.currentTime = 0;
-			vault.pause();
-			pistol.play();
-		});
+nightmare.addEventListener('click', function(){
+	nightmareMode = true;
+	console.log('nightmare mode:', nightmareMode)
+});
+
+heart.forEach(function(heart){
+	heart.addEventListener('click', function(){
+		console.log(this)
 	});
 
-	nightmare.addEventListener('click', function(){
-		nightmareMode = true;
-		console.log('nightmare mode:', nightmareMode)
+	heart.addEventListener('mouseenter', function(e){
+		console.log(e);
 	});
+})
 
-
-
-
-	//if(!nightmare) - add hints etc. 
-
-	//fork lift sound for menu move
-	//glowing skull
-	//pistol shot for select
-	//Ultra Violence
-	//NIGHTMARE
-
-	//mouseenter
-	//mouseleave
-
-
-	function initGame(){
-		//call this at start of game
-		//call again to reset game state	
+var myCoordinates = window.addEventListener('mousemove', function(e){
+	var mouseCoord = {
+		x: e.clientX,
+		y: e.clientY
 	}
-	//programatically set the classes so instead of starting
-	//with one the hidden class, add it to that specific element
-	//that way everytime i restart the board its back to step zero
+	console.log(mouseCoord)
+	return myCoordinates; 
+});
+
+
+//if(!nightmare) - add hints etc. 
+
+function initGame(){
+	//call function to set state at beginning
+	//call again to reset game state	
+	// startPuzzle.style.display = 'none';
+	puzzleSolved.classList.remove('hidden');
+	puzzleUnsolved.classList.add('hidden');
+	startPuzzle.classList.add('hidden');
+	difficultyContainer.classList.remove('hidden');
+	piecesContainer.classList.add('hidden');
+	nightmareMode = false;
+	console.log('init game')
+};
+
+function generatePuzzlePieces(){
+	var containerDimensions = piecesContainer.getBoundingClientRect(),
+	maxWidth = containerDimensions.width;
+	maxHeight = containerDimensions.height;
+
+	console.log(containerDimensions);
+	console.log(maxWidth);
+	console.log(maxHeight);
+}
+
+
+function puzzlePieceImages(){
+	var myImg = new Image
+	myImg.src = 'pieces/Group 5.png';
+	document.body.appendChild('myImg')
+}
+
+// var myImg = new Image
+// myImg.src = 'pieces/Group 5.png';
+// myImg.classList.add('puzzlePiece');
+// piecesContainer.append(myImg);
+
+// var myImg = new Image
+// var myNum = 
+// myImg.src = 'pieces/Group 1.png';
+// myImg.classList.add('shadowed');
+// piecesContainer.append(myImg);
+
+
+
+
+
+//give them a random z-index so they stack on top each other?
+
+initGame();
+//test initGame function early on, and update it frequently so you can
+//make sure its up to date, that way you are not having to do this all
+//at the end 
+
+//programatically set the classes so instead of starting
+//with one the hidden class, add it to that specific element
+//that way everytime i restart the board its back to step zero
 </script>
