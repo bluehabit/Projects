@@ -288,6 +288,35 @@ function puzzlePieceImages(){
 
 
 
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var test = puzzlePieces[0]
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	piece.addEventListener('click', swapPiece)
+});
+//the problem is the () paranthesis in (piece) call the function
+
+function swapPiece(e){
+	e.target.clicked = !e.target.clicked
+}
+
+function grabPiece(e){
+
+}
+
+puzzlePieces.forEach(function(piece){
+	piece.addEventListener('click', function(e){
+		this.addEventListener('mousemove', function(e){
+		if(this.clicked){
+			this.style.left = e.clientX - 55;
+			this.style.top = e.clientY - 55;
+		} else {
+			return;
+		}	
+		});
+	});
+})
 
 
 //give them a random z-index so they stack on top each other?
