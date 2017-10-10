@@ -1,303 +1,138 @@
-<div class='mainContainer'>
+<h2>Match DIV to Container</h2>
 
-<div class='puzzleCanvas'>	
-	<img class='puzzleSolved' src='_Puzzle_solved.png'>
-	<img class='puzzleUnsolved' src='_Puzzle_bg_unsolved.png'>
+<div class='temp'>
+	<img data-match='01' class='shadowed' src='pieces/Group 5.png'>
+	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+<!-- 	<img data-match='01' data-inSlot='' class='shadowed' src='pieces/Group 5.png'> -->
 </div>
 
-	<button class='startPuzzle'>Begin</button>
+<br>
+<br>
+<br>
 
-	<div class='difficultyContainer'>
-		<h2>Select Difficulty</h2>
-		<button class='uv'>Novice</button>
-		<button class='nightmare'>Nightmare</button>
-	</div>
+<div data-match='01' data-occupied='false' class='match'></div>
 
-	<div class='piecesContainer'>
-	</div>
+<br>
+<br>
+<br>
 
-	<div class='temp'>
-		<img class='shadowed' src='pieces/Group 5.png'>
-		<img class='shadowed' src='pieces/Group 6.png'>
-	<!-- 	<img class='shadowed' src='pieces/Group 7.png'>
-		<img class='shadowed' src='pieces/Group 8.png'>
-		<img class='shadowed' src='pieces/Group 9.png'>
-		<img class='shadowed' src='pieces/Group 10.png'>
-		<img class='shadowed' src='pieces/Group 11.png'>
-		<img class='shadowed' src='pieces/Group 12.png'>
-		<img class='shadowed' src='pieces/Group 13.png'>
-		<img class='shadowed' src='pieces/Group 14.png'> -->
-	</div>
-</div>
+<div data-match='27' data-occupied='false' class='match'></div>
 
-<style>
-	@import url('https://fonts.googleapis.com/css?family=Orbitron');
+<style>	
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
 
-	@font-face {
-  	font-family: 'Doom';
-  	src: url('AmazDooMLeft.ttf'); 
-	}
+img[data-match="01"]{
+	border: 2px solid purple;
+	left: 250px;
+}
 
-	@keyframes fadeIn {
-		from {
-			opacity: 0;`
-		}
-		to {
-			opacity: 1;
-		}
-	}
+img[data-match="27"]{
+	border: 2px solid yellow;
+}
 
-	@keyframes fadeOut {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
-	}
+.match {
+	background-color: purple;
+	width: 110px;
+	height: 95px;
+	margin-left: 50px;
+}
 
-	img {
-		display: block;
-		margin: auto;
-		max-width: 100%;
-	}
+div[data-match="27"]{
+	background-color: yellow;
+}
 
-	body {
-		user-select: none;
-	}
+.highZindexValue {
+	z-index: 99;
+}
 
-/*	.puzzleCanvas img {
-		display: block;
-		margin: auto;
-	}*/
-
-
-	html {
-		background-color: #2a2a2a;
-		font-family: 'Orbitron', sans-serif;
-		font-size: 1.2em;
-	}
-
-	.temp {
-		border: 2px solid blue;
-		height: 600px;
-	}
-
-	.temp img {
-		position: relative;
-	}
-
-	div > img:nth-child(1) {
-		z-index: 10;
-	}
-
-	div > img:nth-child(2) {
-		z-index: 1;
-		bottom: 15px;
-	}
-
-	.puzzleSolved, .puzzleUnsolved, .puzzlePiece {
-		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
-	}
-
-	.puzzleUnsolved {
-		animation: fadeIn 2s ease;
-	}
-
-	.mainContainer {
-		width: 860px;
-		margin: 0 auto;
-		margin-top: 5%;
-		border: 2px solid white;
-	}	
-
-	.startPuzzle {
-		display: block;
-		width: 25%;
-		margin: 0 auto;
-		margin-top: 5px;
-		opacity: .75;
-		text-transform: uppercase;
-	}
-
-	.difficultyContainer > button {
-		display: block;
-		width: 55%;
-		margin: 0 auto;
-		margin-bottom: 27px;
-	}
-
-	.difficultyContainer {
-		width: 50%;
-		margin: 0 auto;
-		position: relative;
-		bottom: 485px ;
-	}
-
-	.piecesContainer {
-		/*background-color: white;*/
-		border: 2px groove white;
-		width: 820px;
-		height: 325px;
-		margin: 0 auto;
-		margin-top: 5px;
-	}
-
-	button {
-		cursor: pointer;
-		font-family: 'Orbitron', sans-serif;
-		font-size: .89em;
-		transition: all .2s ease;
-		border: 2px solid white;
-		opacity: .85;
-		padding: 21px;
-	}
-
-	button:hover {
-		opacity: 1;
-		background-color: #ec1d88;
-	}
-
-	button:focus {
-		outline:0;
-	}
-
-	h2 {
-		color: white;
-		text-align: center;
-	}
-
-	.hidden {
-		display: none;
-	}
-
-	.shadowed {
-    	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.5));
-    	position: relative;
-	}
+body {
+	user-select: none;
+}
 
 </style>
 
 <script>
-var startPuzzle = document.querySelector('.startPuzzle'),
-puzzleSolved = document.querySelector('.puzzleSolved'),
-puzzleUnsolved = document.querySelector('.puzzleUnsolved'),
-difficultyContainer = document.querySelector('.difficultyContainer'),
-piecesContainer = document.querySelector('.piecesContainer'),
-heart = document.querySelectorAll('.temp > img'),
-nightmareMode;
 
-var pistol = new Audio('sounds/dspistol.wav'),
-vault = new Audio('sounds/vault.mp3'),
-xcom = new Audio('sounds/xcom.mp3');
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var divHolders = document.querySelectorAll('div.match');
 
-var uv = document.querySelector('.uv'),
-nightmare = document.querySelector('.nightmare');
+//initialize the counter
+var counter = checkMatch();
 
-var difficultyButtons = document.querySelectorAll('.difficultyContainer > button')
+var hoof = new Audio('sounds/dshoof.wav');
+hoof.volume = .32;
 
-startPuzzle.addEventListener('click', function(){
-	puzzleSolved.classList.add('hidden');
-	puzzleUnsolved.classList.remove('hidden');
-	piecesContainer.classList.remove('hidden');
-	generatePuzzlePieces();
+var pickup = new Audio('sounds/dsitemup.wav');
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	//set default value of piece.clicked to false
+	piece.addEventListener('click', selectPiece)
+	piece.addEventListener('mousemove', grabPiece)
 });
 
-difficultyButtons.forEach(function(button){
-	button.addEventListener('mouseenter', function(){
-		vault.currentTime = 0; //rewind audio element to the start
-		vault.play();
-	});
 
-	button.addEventListener('click', function(){
-		pistol.currentTime = 0;
-		vault.pause();
-		pistol.play();
-		startPuzzle.classList.remove('hidden');
-		difficultyContainer.classList.add('hidden');
-	});
-});
-
-nightmare.addEventListener('click', function(){
-	nightmareMode = true;
-	console.log('nightmare mode:', nightmareMode)
-});
-
-heart.forEach(function(heart){
-	heart.addEventListener('click', function(){
-		console.log(this)
-	});
-
-	heart.addEventListener('mouseenter', function(e){
-		console.log(e);
-	});
-})
-
-var myCoordinates = window.addEventListener('mousemove', function(e){
-	var mouseCoord = {
-		x: e.clientX,
-		y: e.clientY
+function selectPiece(e){
+	this.clicked = !this.clicked
+	if(this.clicked){
+		pickup.play();
+		this.classList.toggle('highZindexValue');
+	} else {
+		hoof.play();
+		this.classList.toggle('highZindexValue');
 	}
-	console.log(mouseCoord)
-	return myCoordinates; 
-});
 
+	for(var i = 0; i < divHolders.length; i++){
+		var currentDiv = divHolders[i];
+		var divBoundary = currentDiv.getBoundingClientRect();
 
-//if(!nightmare) - add hints etc. 
-
-function initGame(){
-	//call function to set state at beginning
-	//call again to reset game state	
-	// startPuzzle.style.display = 'none';
-	puzzleSolved.classList.remove('hidden');
-	puzzleUnsolved.classList.add('hidden');
-	startPuzzle.classList.add('hidden');
-	difficultyContainer.classList.remove('hidden');
-	piecesContainer.classList.add('hidden');
-	nightmareMode = false;
-	console.log('init game')
-};
-
-function generatePuzzlePieces(){
-	var containerDimensions = piecesContainer.getBoundingClientRect(),
-	maxWidth = containerDimensions.width;
-	maxHeight = containerDimensions.height;
-
-	console.log(containerDimensions);
-	console.log(maxWidth);
-	console.log(maxHeight);
+		if(checkBoundary(this, divBoundary)) {	
+			counter(this, currentDiv); 	
+			lockPiece(this, divBoundary);
+		} 
+	}
 }
 
-
-function puzzlePieceImages(){
-	var myImg = new Image
-	myImg.src = 'pieces/Group 5.png';
-	document.body.appendChild('myImg')
+function checkBoundary(puzzlePiece, divBoundary){
+	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+		&& !puzzlePiece.clicked) {	
+		return true;
+	}
 }
 
-// var myImg = new Image
-// myImg.src = 'pieces/Group 5.png';
-// myImg.classList.add('puzzlePiece');
-// piecesContainer.append(myImg);
+function grabPiece(e){
+	if(this.clicked){
+		this.style.left = e.clientX - 61 + 'px';
+		this.style.top =  e.clientY - 61 + 'px';
+	}
+}
 
-// var myImg = new Image
-// var myNum = 
-// myImg.src = 'pieces/Group 1.png';
-// myImg.classList.add('shadowed');
-// piecesContainer.append(myImg);
+function lockPiece(puzzlePiece, divHolder){
+	puzzlePiece.style.top = divHolder.top + 'px';
+	puzzlePiece.style.left = divHolder.left + 'px';
+}
 
+function between(input, min, max) {
+  return input >= min && input <= max;
+}
 
+function checkMatch(){
+	var total = 0;
+	return function(puzzlePiece, div){
+		if((puzzlePiece.dataset.match)===(div.dataset.match)){
+				console.log('match!')
+				total++; 
+		} else {
+				total--;
+		}
+		console.log(total);
+		return total;
+	}
+}
 
-
-
-//give them a random z-index so they stack on top each other?
-
-initGame();
-//test initGame function early on, and update it frequently so you can
-//make sure its up to date, that way you are not having to do this all
-//at the end 
-
-//programatically set the classes so instead of starting
-//with one the hidden class, add it to that specific element
-//that way everytime i restart the board its back to step zero
 </script>
+
