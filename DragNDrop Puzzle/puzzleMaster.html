@@ -1,26 +1,32 @@
 <div class='mainContainer'>
+	<div class='puzzleCanvas'>	
+		<img class='puzzleSolved' src='_Puzzle_solved.png'>
+		<img class='puzzleUnsolved' src='_Puzzle_bg_unsolved.png'>
 
-<div class='puzzleCanvas'>	
-	<img class='puzzleSolved' src='_Puzzle_solved.png'>
-	<img class='puzzleUnsolved' src='_Puzzle_bg_unsolved.png'>
+		<div data-match='05' data-occupied='false' class='match'></div>
+		<div data-match='06' data-occupied='false' class='match'></div>
+		<div data-match='07' data-occupied='false' class='match'></div>
+<!-- 		<div data-match='08' data-occupied='false' class='match'></div> -->
+		<div data-match='27' data-occupied='false' class='match'></div>
 </div>
-
-	<button class='startPuzzle'>Begin</button>
 
 	<div class='difficultyContainer'>
 		<h2>Select Difficulty</h2>
 		<button class='uv'>Novice</button>
 		<button class='nightmare'>Nightmare</button>
 	</div>
-
-<!-- 	<div class='piecesContainer'>
-	</div>
- -->
-	<div class='heart'>
-		<img class='shadowed' src='pieces/Group 5.png'>
-		<img class='shadowed' src='pieces/Group 6.png'>
-	</div>
 </div>
+
+<button class='startPuzzle'>Begin</button>
+
+<div class='temp'>
+	<img data-match='05' class='shadowed' src='pieces/Group 5.png'>
+	<img data-match='06' class='shadowed' src='pieces/Group 6.png'>
+	<img data-match='07' class='shadowed' src='pieces/Group 7.png'>
+<!-- 	<img data-match='08' class='shadowed' src='pieces/Group 8.png'> -->
+	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+</div>
+
 
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Orbitron');
@@ -48,21 +54,21 @@
 		}
 	}
 
+	* {
+		box-sizing: border-box;
+	}
+
+
 	img {
 		display: block;
-		margin: auto;
+		/*margin: auto;*/
 		max-width: 100%;
 	}
 
 	body {
 		user-select: none;
+		overflow: hidden;
 	}
-
-/*	.puzzleCanvas img {
-		display: block;
-		margin: auto;
-	}*/
-
 
 	html {
 		background-color: #2a2a2a;
@@ -70,27 +76,20 @@
 		font-size: 1.2em;
 	}
 
-	.heart {
-		border: 2px solid blue;
-		height: 600px;
-/*		display: none;*/
-	}
-
-	.heart img {
-		position: relative;
-	}
-
-	div > img:nth-child(1) {
-		z-index: 10;
-	}
-
-	div > img:nth-child(2) {
-		z-index: 1;
-		bottom: 15px;
+	.puzzleCanvas {
+		border: 2px solid green;
+		width: 868px;
+		height: 579px;
+		position: absolute;
+		margin: 0 auto;
 	}
 
 	.puzzleSolved, .puzzleUnsolved, .puzzlePiece {
 		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
+	}
+
+	.puzzleSolves, .puzzleUnsolved {
+		z-index: -2;
 	}
 
 	.puzzleUnsolved {
@@ -100,17 +99,16 @@
 	.mainContainer {
 		width: 860px;
 		margin: 0 auto;
-		margin-top: 5%;
+		margin-top: 12px;
 		border: 2px solid white;
 		height: 579px;
 	}	
 
 	.startPuzzle {
 		display: block;
-		width: 25%;
+		width: 250px;
 		margin: 0 auto;
 		margin-top: 5px;
-		opacity: .75;
 		text-transform: uppercase;
 	}
 
@@ -122,21 +120,12 @@
 	}
 
 	.difficultyContainer {
-		width: 50%;
-		margin: 0 auto;
 		position: relative;
-		bottom: 485px ;
+		width: 425px;
+		margin: 0 auto;
+		top: 20%;
 	}
 
-/*	.piecesContainer {
-		background-color: white;
-		border: 2px groove white;
-		width: 820px;
-		height: 325px;
-		margin: 0 auto;
-		margin-top: 5px;
-	}
-*/
 	button {
 		cursor: pointer;
 		font-family: 'Orbitron', sans-serif;
@@ -170,6 +159,95 @@
     	position: relative;
 	}
 
+
+	/*///////////////////new rules//////////////////*/
+
+	.match {
+		background-color: grey;
+		width: 110px;
+		height: 95px;
+		margin-left: 50px;
+	}
+
+	.highZindexValue {
+		z-index: 99;
+	}
+
+	.lowZindexValue {
+		z-index: 1;
+		border: 2px solid green;
+	}
+
+
+	body {
+		user-select: none;
+	}
+
+	.temp > img {
+		position: absolute;
+		border: 2px solid red;
+		display: inline-block;
+	}
+
+	img[data-match="05"]{
+		border: 2px solid purple;
+		left: 350px;
+	}
+
+	img[data-match="06"]{
+		border: 2px solid blue;
+	}
+
+	img[data-match="07"]{
+		border: 2px solid pink;
+	}
+
+	img[data-match="27"]{
+		border: 2px solid yellow;
+		left: 220px;
+	}
+
+	div[data-occupied="true"] {
+	  border: 5px dashed red;
+	}
+
+	/*position puzzle container divs*/
+	div[data-match]{
+		width: 110px;
+	  	display: inline-block;
+		position: absolute;
+		opacity: .2;
+		/*z-index: -1;*/
+		/*uncomment above when you are finished
+		testing (places container behind portrait)*/
+	}
+
+	/*************************************************/
+
+	div[data-match='05']{
+		bottom: 147px;
+		left: 658px;
+		background-color: purple;
+	}
+
+	div[data-match='06']{
+		bottom: 242px;
+		left: 658px;
+		background-color: blue;
+	}
+
+	div[data-match='07']{
+		bottom: 147px;
+		left: 565px;
+		background-color: pink;
+	}
+
+	div[data-match='27']{
+		bottom: 243px;
+		left: -8px;
+		background-color: yellow;
+	}
+
 </style>
 
 <script>
@@ -177,14 +255,21 @@ var startPuzzle = document.querySelector('.startPuzzle'),
 puzzleSolved = document.querySelector('.puzzleSolved'),
 puzzleUnsolved = document.querySelector('.puzzleUnsolved'),
 difficultyContainer = document.querySelector('.difficultyContainer'),
-piecesContainer = document.querySelector('.piecesContainer'),
-heartContainer = document.querySelectorAll('.heart > img'),
-heartParent = document.querySelector('.heart'),
+heartParent = document.querySelector('.temp'),
 nightmareMode;
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var divContainers = document.querySelectorAll('div.match');
 
 var pistol = new Audio('sounds/dspistol.wav'),
 vault = new Audio('sounds/vault.mp3'),
 xcom = new Audio('sounds/xcom.mp3');
+
+var hoof = new Audio('sounds/dshoof.wav');
+hoof.volume = .32;
+var pickup = new Audio('sounds/dsitemup.wav');
+
+pistol.volume = .02;
 
 var uv = document.querySelector('.uv'),
 nightmare = document.querySelector('.nightmare');
@@ -194,10 +279,8 @@ var difficultyButtons = document.querySelectorAll('.difficultyContainer > button
 startPuzzle.addEventListener('click', function(){
 	pistol.currentTime = 0;
 	pistol.play();
-	puzzleSolved.classList.add('hidden');
-	puzzleUnsolved.classList.remove('hidden');
-	// piecesContainer.classList.remove('hidden');
-	// generatePuzzlePieces();
+	// puzzleSolved.classList.add('hidden');
+	// puzzleUnsolved.classList.remove('hidden');
 	heartParent.classList.remove('hidden');
 });
 
@@ -221,26 +304,6 @@ nightmare.addEventListener('click', function(){
 	console.log('nightmare mode:', nightmareMode)
 });
 
-heartContainer.forEach(function(heart){
-	heart.addEventListener('click', function(){
-		console.log(this)
-	});
-
-	heart.addEventListener('mouseenter', function(e){
-		console.log(e);
-	});
-});
-
-var myCoordinates = window.addEventListener('mousemove', function(e){
-	var mouseCoord = {
-		x: e.clientX,
-		y: e.clientY
-	}
-	// console.log(mouseCoord)
-	return myCoordinates; 
-});
-
-
 //if(!nightmare) - add hints etc. 
 
 function initGame(){
@@ -252,30 +315,123 @@ function initGame(){
 	startPuzzle.classList.add('hidden');
 	difficultyContainer.classList.remove('hidden');
 	heartParent.classList.add('hidden');
-	// piecesContainer.classList.add('hidden');
 	nightmareMode = false;
 	console.log('init game')
 };
 
-// function generatePuzzlePieces(){
-// 	var containerDimensions = piecesContainer.getBoundingClientRect(),
-// 	maxWidth = containerDimensions.width;
-// 	maxHeight = containerDimensions.height;
+//*new code*//
 
-// 	console.log(containerDimensions);
-// 	console.log(maxWidth);
-// 	console.log(maxHeight);
-// }
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	//set default value of piece.clicked to false
+	piece.addEventListener('click', selectPiece)
+	piece.addEventListener('mousemove', grabPiece)
+});
 
 
-function puzzlePieceImages(){
-	var myImg = new Image
-	myImg.src = 'pieces/Group 5.png';
-	document.body.appendChild('myImg')
+function selectPiece(e){
+	var puzzlePiece = this;
+	this.clicked = !this.clicked
+
+	if(this.clicked){
+		pickup.play();	
+		this.classList.toggle('highZindexValue');
+	} else {
+		// hoof.play();
+		this.classList.toggle('highZindexValue');
+	}
+
+	window.addEventListener('mousemove', function(evt){
+		if(puzzlePiece.clicked){
+			puzzlePiece.style.left = evt.clientX - 55 + 'px';
+			puzzlePiece.style.top = evt.clientY - 55 + 'px';
+		} else {
+			return;
+		}
+	})
+
+	divContainers.forEach(function(container){
+		if(checkBoundary(puzzlePiece, container)){
+			lockPiece(puzzlePiece, container);
+			checkWin();
+			hoof.play();
+		} 
+	});
+
+	resetDivContainers()
+	boardState()
+
+}
+
+function boardState(){
+	divContainers.forEach(function(divContainer){
+		puzzlePieces.forEach(function(puzzlePiece){
+			if (checkBoundary(puzzlePiece, divContainer)) {
+        	divContainer.dataset.occupied = "true";
+      		}
+		})
+	})
+}
+
+function resetDivContainers(){
+	divContainers.forEach(function(divContainer){
+		divContainer.dataset.occupied = "false";
+	})
 }
 
 
+function checkBoundary(puzzlePiece, currentDiv){
+	var currentDiv = currentDiv;
+	var divBoundary = currentDiv.getBoundingClientRect();
 
+	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 15, divBoundary.right - 55) 
+		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 15, divBoundary.bottom - 85) 
+		&& !puzzlePiece.clicked) {	
+				return true;
+	} else {
+		return false;
+	}
+}
+
+function grabPiece(e){
+	if(this.clicked){
+		this.style.left = e.clientX - 55 + 'px';
+		this.style.top =  e.clientY - 55 + 'px';
+		// this.style.zIndex = ''
+	}
+}
+
+function lockPiece(puzzlePiece, divContainer){
+	if(divContainer.dataset.occupied === 'false'){
+		var divBoundary = divContainer.getBoundingClientRect();
+		puzzlePiece.style.top = divBoundary.top + 'px';
+		puzzlePiece.style.left = divBoundary.left + 'px';
+
+	} else {
+		return;
+	}
+}
+
+function between(input, min, max) {
+  return input >= min && input <= max;
+}
+
+function checkWin(){
+	var total = 0;
+	divContainers.forEach(function(container){
+		puzzlePieces.forEach(function(puzzlePiece){
+			if(checkBoundary(puzzlePiece, container) && puzzlePiece.dataset.match === container.dataset.match){
+				total++;
+			}
+		})
+	})
+	
+	if(total === divContainers.length){
+		console.log('you win')
+	}
+}
+
+/*existing code*/
 
 initGame();
 
