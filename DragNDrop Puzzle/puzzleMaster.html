@@ -6,7 +6,7 @@
 		<div data-match='05' data-occupied='false' class='match'></div>
 		<div data-match='06' data-occupied='false' class='match'></div>
 		<div data-match='07' data-occupied='false' class='match'></div>
-<!-- 		<div data-match='08' data-occupied='false' class='match'></div> -->
+		<div data-match='08' data-occupied='false' class='match'></div>
 		<div data-match='27' data-occupied='false' class='match'></div>
 </div>
 
@@ -23,7 +23,7 @@
 	<img data-match='05' class='shadowed' src='pieces/Group 5.png'>
 	<img data-match='06' class='shadowed' src='pieces/Group 6.png'>
 	<img data-match='07' class='shadowed' src='pieces/Group 7.png'>
-<!-- 	<img data-match='08' class='shadowed' src='pieces/Group 8.png'> -->
+	<img data-match='08' class='shadowed' src='pieces/Group 8.png'>
 	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
 </div>
 
@@ -202,6 +202,11 @@
 		border: 2px solid pink;
 	}
 
+	img[data-match="08"]{
+		border: 2px solid darkorange;
+	}
+
+
 	img[data-match="27"]{
 		border: 2px solid yellow;
 		left: 220px;
@@ -237,9 +242,15 @@
 	}
 
 	div[data-match='07']{
-		bottom: 147px;
-		left: 565px;
+		left: 577px;
+		bottom: 97px;
 		background-color: pink;
+	}
+
+	div[data-match='08']{
+		bottom: 192px;
+    	left: 577px;
+		background-color: darkorange;
 	}
 
 	div[data-match='27']{
