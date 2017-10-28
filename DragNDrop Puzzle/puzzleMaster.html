@@ -8,6 +8,10 @@
 		<div data-match='07' data-occupied='false' class='match'></div>
 		<div data-match='08' data-occupied='false' class='match'></div>
 		<div data-match='09' data-occupied='false' class='match'></div>
+		<div data-match='10' data-occupied='false' class='match'></div>
+		<div data-match='11' data-occupied='false' class='match'></div>
+		<div data-match='12' data-occupied='false' class='match'></div>
+		<div data-match='13' data-occupied='false' class='match'></div>
 		<div data-match='27' data-occupied='false' class='match'></div>
 
 		<div class='temp'>
@@ -16,6 +20,10 @@
 		<img data-match='07' class='shadowed' src='pieces/Group 7.png'>
 		<img data-match='08' class='shadowed' src='pieces/Group 8.png'>
 		<img data-match='09' class='shadowed' src='pieces/Group 9.png'>
+		<img data-match='10' class='shadowed' src='pieces/Group 10.png'>
+		<img data-match='11' class='shadowed' src='pieces/Group 11.png'>
+		<img data-match='12' class='shadowed' src='pieces/Group 12.png'>
+		<img data-match='13' class='shadowed' src='pieces/Group 13.png'>
 		<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
 		</div>
 	</div>
@@ -215,6 +223,22 @@
 		border: 2px solid antiquewhite;
 	}
 
+	img[data-match="10"]{
+		border: 2px solid darkgreen;
+	}
+
+	img[data-match="11"]{
+		border: 2px solid darkgoldenrod;
+	}
+
+	img[data-match="12"]{
+		border: 2px solid red;
+	}
+
+	img[data-match="13"]{
+		border: 2px solid fuchsia;
+	}
+
 	img[data-match="27"]{
 		border: 2px solid yellow;
 		left: 220px;
@@ -263,6 +287,30 @@
 		background-color: antiquewhite;
 	}
 
+	div[data-match='10']{
+		left: 492px;
+		bottom: 242px;
+		background-color: darkgreen;
+	}
+
+	div[data-match='11']{
+		left: 405px;
+		bottom: 99px;
+		background-color: darkgoldenrod;
+	}
+
+	div[data-match='12']{
+		left: 405px;
+		bottom: 194px;
+		background-color: red;
+	}
+
+	div[data-match='13']{
+		left: 325px;
+		bottom: 147px;
+		background-color: fuchsia;
+	}
+
 	div[data-match='27']{
 		bottom: 243px;
 		left: -8px;
@@ -275,8 +323,8 @@
 
 	div[data-match]{
 		border: none;
-	}
-*/
+	}*/
+
 </style>
 
 <script>
@@ -298,7 +346,7 @@ var hoof = new Audio('sounds/dshoof.wav');
 hoof.volume = .32;
 var pickup = new Audio('sounds/dsitemup.wav');
 
-pistol.volume = .02;
+pistol.volume = .45;
 
 var uv = document.querySelector('.uv'),
 nightmare = document.querySelector('.nightmare');
