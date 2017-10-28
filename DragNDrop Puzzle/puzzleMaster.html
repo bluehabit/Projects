@@ -9,7 +9,16 @@
 		<div data-match='08' data-occupied='false' class='match'></div>
 		<div data-match='09' data-occupied='false' class='match'></div>
 		<div data-match='27' data-occupied='false' class='match'></div>
-</div>
+
+		<div class='temp'>
+		<img data-match='05' class='shadowed' src='pieces/Group 5.png'>
+		<img data-match='06' class='shadowed' src='pieces/Group 6.png'>
+		<img data-match='07' class='shadowed' src='pieces/Group 7.png'>
+		<img data-match='08' class='shadowed' src='pieces/Group 8.png'>
+		<img data-match='09' class='shadowed' src='pieces/Group 9.png'>
+		<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+		</div>
+	</div>
 
 	<div class='difficultyContainer'>
 		<h2>Select Difficulty</h2>
@@ -20,14 +29,6 @@
 
 <button class='startPuzzle'>Begin</button>
 
-<div class='temp'>
-	<img data-match='05' class='shadowed' src='pieces/Group 5.png'>
-	<img data-match='06' class='shadowed' src='pieces/Group 6.png'>
-	<img data-match='07' class='shadowed' src='pieces/Group 7.png'>
-	<img data-match='08' class='shadowed' src='pieces/Group 8.png'>
-	<img data-match='09' class='shadowed' src='pieces/Group 9.png'>
-	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
-</div>
 
 
 <style>
@@ -63,7 +64,7 @@
 
 	img {
 		display: block;
-		/*margin: auto;*/
+	/*	margin: auto;*/
 		max-width: 100%;
 	}
 
@@ -88,10 +89,6 @@
 
 	.puzzleSolved, .puzzleUnsolved, .puzzlePiece {
 		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
-	}
-
-	.puzzleSolves, .puzzleUnsolved {
-		z-index: -2;
 	}
 
 	.puzzleUnsolved {
@@ -158,9 +155,9 @@
 
 	.shadowed {
     	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.5));
-    	position: relative;
+    	position: absolute;
+    	z-index: 20;
 	}
-
 
 	/*///////////////////new rules//////////////////*/
 
@@ -185,10 +182,16 @@
 		user-select: none;
 	}
 
-	.temp > img {
+	/****TIME FUCKER***/
+
+/*	img[data-match]{
 		position: absolute;
 		border: 2px solid red;
-		display: inline-block;
+	}
+*/
+
+	.temp > img {
+		position: absolute;
 	}
 
 	img[data-match="05"]{
@@ -266,14 +269,14 @@
 		background-color: yellow;
 	}
 
-	img[data-match]{
+/*	img[data-match]{
 		border: none;
 	}
 
 	div[data-match]{
 		border: none;
 	}
-
+*/
 </style>
 
 <script>
@@ -351,36 +354,23 @@ puzzlePieces.forEach(function(piece){
 	piece.clicked = false;
 	//set default value of piece.clicked to false
 	piece.addEventListener('click', selectPiece)
-	piece.addEventListener('mousemove', grabPiece)
 });
 
-
 function selectPiece(e){
-	var puzzlePiece = this;
+	var piece = this;
 	this.clicked = !this.clicked
 
 	if(this.clicked){
 		pickup.play();	
 		this.classList.toggle('highZindexValue');
 	} else {
-		// hoof.play();
 		this.classList.toggle('highZindexValue');
 	}
 
-	window.addEventListener('mousemove', function(evt){
-		if(puzzlePiece.clicked){
-			puzzlePiece.style.left = evt.clientX - 55 + 'px';
-			puzzlePiece.style.top = evt.clientY - 55 + 'px';
-		} else {
-			return;
-		}
-	})
-
 	divContainers.forEach(function(container){
-		if(checkBoundary(puzzlePiece, container)){
-			lockPiece(puzzlePiece, container);
+		if(checkBoundary(piece, container)){
+			lockPiece(piece, container);
 			checkWin();
-			hoof.play();
 		} 
 	});
 
@@ -388,6 +378,19 @@ function selectPiece(e){
 	boardState()
 
 }
+
+window.addEventListener('mousemove', function(evt){
+	puzzlePieces.forEach(function(piece){
+		if(piece.clicked){
+			var pieceParent = piece.offsetParent.getBoundingClientRect();
+			piece.style.left = evt.clientX - pieceParent.x - 55 + 'px';
+			piece.style.top = evt.clientY - pieceParent.y - 55 + 'px';
+		} else {
+			return;
+		}
+	})
+})
+
 
 function boardState(){
 	divContainers.forEach(function(divContainer){
@@ -419,22 +422,17 @@ function checkBoundary(puzzlePiece, currentDiv){
 	}
 }
 
-function grabPiece(e){
-	if(this.clicked){
-		this.style.left = e.clientX - 55 + 'px';
-		this.style.top =  e.clientY - 55 + 'px';
-		// this.style.zIndex = ''
-	}
-}
-
 function lockPiece(puzzlePiece, divContainer){
 	if(divContainer.dataset.occupied === 'false'){
 		var divBoundary = divContainer.getBoundingClientRect();
-		puzzlePiece.style.top = divBoundary.top + 'px';
-		puzzlePiece.style.left = divBoundary.left + 'px';
+		var divParent = divContainer.offsetParent.getBoundingClientRect();
 
+		puzzlePiece.style.top = divBoundary.top - divParent.y + 'px';
+		puzzlePiece.style.left = divBoundary.left - divParent.x + 'px';
+
+		hoof.play();
 	} else {
-		return;
+		return
 	}
 }
 
