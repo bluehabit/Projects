@@ -12,6 +12,13 @@
 		<div data-match='11' data-occupied='false' class='match'></div>
 		<div data-match='12' data-occupied='false' class='match'></div>
 		<div data-match='13' data-occupied='false' class='match'></div>
+		<div data-match='14' data-occupied='false' class='match'></div>
+		<div data-match='15' data-occupied='false' class='match'></div>
+		<div data-match='16' data-occupied='false' class='match'></div>
+		<div data-match='17' data-occupied='false' class='match'></div>
+		<div data-match='19' data-occupied='false' class='match'></div>
+		<div data-match='20' data-occupied='false' class='match'></div>
+		<div data-match='21' data-occupied='false' class='match'></div>
 		<div data-match='27' data-occupied='false' class='match'></div>
 
 		<div class='temp'>
@@ -24,6 +31,13 @@
 		<img data-match='11' class='shadowed' src='pieces/Group 11.png'>
 		<img data-match='12' class='shadowed' src='pieces/Group 12.png'>
 		<img data-match='13' class='shadowed' src='pieces/Group 13.png'>
+		<img data-match='14' class='shadowed' src='pieces/Group 14.png'>
+		<img data-match='15' class='shadowed' src='pieces/Group 15.png'>
+		<img data-match='16' class='shadowed' src='pieces/Group 16.png'>
+		<img data-match='17' class='shadowed' src='pieces/Group 17.png'>
+		<img data-match='19' class='shadowed' src='pieces/Group 19.png'>
+		<img data-match='20' class='shadowed' src='pieces/Group 20.png'>
+		<img data-match='21' class='shadowed' src='pieces/Group 21.png'>
 		<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
 		</div>
 	</div>
@@ -162,7 +176,7 @@
 	}
 
 	.shadowed {
-    	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.5));
+    	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.3));
     	position: absolute;
     	z-index: 20;
 	}
@@ -239,6 +253,34 @@
 		border: 2px solid fuchsia;
 	}
 
+	img[data-match="14"]{
+		border: 2px solid black;
+	}
+
+	img[data-match="15"]{
+		border: 2px solid chartreuse;
+	}
+
+	img[data-match="16"]{
+		border: 2px solid cornflowerblue;
+	}
+
+	img[data-match="17"]{
+		border: 2px solid chocolate;
+	}
+
+	img[data-match="19"]{
+		border: 2px solid crimson;
+	}
+
+	img[data-match="20"]{
+		border: 2px solid darkslategray;
+	}
+
+	img[data-match="21"]{
+		border: 2px solid lightpink;
+	}
+
 	img[data-match="27"]{
 		border: 2px solid yellow;
 		left: 220px;
@@ -258,7 +300,7 @@
 	/*************************************************/
 
 	div[data-match='05']{
-		bottom: 147px;
+		bottom: 145px;
 		left: 658px;
 		background-color: purple;
 	}
@@ -309,6 +351,48 @@
 		left: 325px;
 		bottom: 147px;
 		background-color: fuchsia;
+	}
+
+	div[data-match='14']{
+		left: 325px;
+		bottom: 242px;
+		background-color: black;
+	}
+
+	div[data-match='15']{
+		left: 239px;
+		bottom: 99px;
+		background-color: chartreuse;
+	}
+
+	div[data-match='16']{
+		left: 239px;
+		bottom: 194px;
+		background-color: cornflowerblue;
+	}
+
+	div[data-match='17']{
+		bottom: 144px;
+		left: 158px;
+		background-color: chocolate;
+	}
+
+	div[data-match='19']{
+		bottom: 50px;
+		left: 658px;
+		background-color: crimson;
+	}
+
+	div[data-match='20']{
+		bottom: 50px;
+		left: 492px;
+		background-color: darkslategray;
+	}
+
+	div[data-match='21']{
+		bottom: 50px;
+		left: 325px;
+		background-color: lightpink;
 	}
 
 	div[data-match='27']{
