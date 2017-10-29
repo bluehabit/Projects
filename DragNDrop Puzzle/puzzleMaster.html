@@ -43,7 +43,7 @@
 		<div data-match='43' data-occupied='false' class='match'></div>
 		<div data-match='44' data-occupied='false' class='match'></div>
 		<div data-match='45' data-occupied='false' class='match'></div>
-
+		<div data-match='99' data-occupied='false' class='match'></div>
 
 
 		<div class='temp'>
@@ -87,7 +87,7 @@
 		<img data-match='43' class='shadowed' src='pieces/Group 43.png'>
 		<img data-match='44' class='shadowed' src='pieces/Group 44.png'>
 		<img data-match='45' class='shadowed' src='pieces/Group 45.png'>
-
+		<img data-match='99' class='shadowed' src='pieces/Group 99.png'>
 
 
 
@@ -434,6 +434,10 @@
 		border: 2px solid pink;
 	}
 
+	img[data-match="99"]{
+		border: 2px solid gray;
+	}
+
 	/*position puzzle container divs*/
 	div[data-match]{
 		width: 110px;
@@ -564,14 +568,14 @@
 	}
 
 	div[data-match='26']{
-		bottom: 145px;
+		bottom: 148px;
 		left: -9px;
 		background-color: purple;
 	}
 
 	div[data-match='27']{
-		bottom: 243px;
-		left: -8px;
+		bottom: 246px;
+		left: -9px;
 		background-color: yellow;
 	}
 
@@ -672,15 +676,21 @@
 	}
 
 	div[data-match='44']{
-		bottom: 338px;
-    	left: -8px;
+		bottom: 342px;
+    	left: -9px;
 		background-color: red;
 	}
 
 	div[data-match='45']{
-		bottom: 434px;
-    	left: -8px;
+		bottom: 440px;
+    	left: -9px;
 		background-color: pink;
+	}
+
+	div[data-match='99']{
+		bottom: 244px;
+    	left: 158px;
+		background-color: grey;
 	}
 
 	div[data-occupied="true"] {
@@ -688,13 +698,15 @@
 	}
 
 
-/*	img[data-match]{
+	/*Hide For Debugging*/
+	div[data-match]{
+		opacity: 0;
+	}
+
+	img[data-match]{
 		border: none;
 	}
 
-	div[data-match]{
-		border: none;
-	}*/
 
 </style>
 
@@ -727,8 +739,8 @@ var difficultyButtons = document.querySelectorAll('.difficultyContainer > button
 startPuzzle.addEventListener('click', function(){
 	pistol.currentTime = 0;
 	pistol.play();
-	// puzzleSolved.classList.add('hidden');
-	// puzzleUnsolved.classList.remove('hidden');
+	puzzleSolved.classList.add('hidden');
+	puzzleUnsolved.classList.remove('hidden');
 	heartParent.classList.remove('hidden');
 });
 
