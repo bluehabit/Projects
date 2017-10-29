@@ -25,6 +25,8 @@
 		<div data-match='25' data-occupied='false' class='match'></div>
 		<div data-match='26' data-occupied='false' class='match'></div>
 		<div data-match='27' data-occupied='false' class='match'></div>
+		<div data-match='28' data-occupied='false' class='match'></div>
+		<div data-match='29' data-occupied='false' class='match'></div>
 
 		<div class='temp'>
 		<img data-match='05' class='shadowed' src='pieces/Group 5.png'>
@@ -49,6 +51,8 @@
 		<img data-match='25' class='shadowed' src='pieces/Group 25.png'>
 		<img data-match='26' class='shadowed' src='pieces/Group 26.png'>
 		<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+		<img data-match='28' class='shadowed' src='pieces/Group 28.png'>
+		<img data-match='29' class='shadowed' src='pieces/Group 29.png'>
 		</div>
 	</div>
 
@@ -320,6 +324,14 @@
 		left: 220px;
 	}
 
+	img[data-match="28"]{
+		border: 2px solid beige;
+	}
+
+	img[data-match="29"]{
+		border: 2px solid black;
+	}
+
 	/*position puzzle container divs*/
 	div[data-match]{
 		width: 110px;
@@ -459,6 +471,18 @@
 		bottom: 243px;
 		left: -8px;
 		background-color: yellow;
+	}
+
+	div[data-match='28']{
+		bottom: 338px;
+		left: 658px;
+		background-color: beige;
+	}
+
+	div[data-match='29']{
+		bottom: 433px;
+		left: 658px;
+		background-color: black;
 	}
 
 	div[data-occupied="true"] {
