@@ -229,11 +229,15 @@
 	.shadowed {
     	filter: drop-shadow(12px 14px 2px rgba(0,0,0,0.5));
     	position: absolute;
-    	z-index: 20;
+    	z-index: 2;
 	}
 
 	.noShadow {
 		filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
+	}
+
+	.appearOnTop {
+		z-index: 10;
 	}
 
 	/*///////////////////new rules//////////////////*/
@@ -449,25 +453,25 @@
 
 	div[data-match='05']{
 		bottom: 147px;
-		left: 658px;
+		left: 664px;
 		background-color: purple;
 	}
 
 	div[data-match='06']{
 		bottom: 244px;
-		left: 658px;
+		left: 664px;
 		background-color: blue;
 	}
 
 	div[data-match='07']{
-		left: 575px;
+		left: 579px;
 		bottom: 99px;
 		background-color: pink;
 	}
 
 	div[data-match='08']{
-		bottom: 197px;
-    	left: 574px;
+		bottom: 196px;
+    	left: 579px;
 		background-color: darkorange;
 	}
 
@@ -526,8 +530,8 @@
 	}
 
 	div[data-match='19']{
-		bottom: 50px;
-		left: 658px;
+		bottom: 49px;
+		left: 664px;
 		background-color: crimson;
 	}
 
@@ -581,13 +585,13 @@
 
 	div[data-match='28']{
 		bottom: 341px;
-		left: 658px;
+		left: 664px;
 		background-color: beige;
 	}
 
 	div[data-match='29']{
 		bottom: 438px;
-		left: 658px;
+		left: 664px;
 		background-color: black;
 	}
 
@@ -598,8 +602,8 @@
 	}
 
 	div[data-match='31']{
-		bottom: 389px;
-		left: 578px;
+		left: 579px;
+		bottom: 390px;
 		background-color: fuchsia;
 	}
 
@@ -794,6 +798,12 @@ function selectPiece(e){
 	var piece = this;
 	this.clicked = !this.clicked
 	piece.classList.remove('noShadow');
+
+	puzzlePieces.forEach(function(piece){
+		piece.classList.remove('appearOnTop');	
+	})
+
+	piece.classList.add('appearOnTop');
 
 	if(this.clicked){
 		pickup.play();	
