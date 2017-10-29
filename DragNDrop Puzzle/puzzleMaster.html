@@ -27,6 +27,13 @@
 		<div data-match='27' data-occupied='false' class='match'></div>
 		<div data-match='28' data-occupied='false' class='match'></div>
 		<div data-match='29' data-occupied='false' class='match'></div>
+		<div data-match='30' data-occupied='false' class='match'></div>
+		<div data-match='31' data-occupied='false' class='match'></div>
+		<div data-match='32' data-occupied='false' class='match'></div>
+		<div data-match='33' data-occupied='false' class='match'></div>
+
+
+
 
 		<div class='temp'>
 		<img data-match='05' class='shadowed' src='pieces/Group 5.png'>
@@ -53,6 +60,15 @@
 		<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
 		<img data-match='28' class='shadowed' src='pieces/Group 28.png'>
 		<img data-match='29' class='shadowed' src='pieces/Group 29.png'>
+		<img data-match='30' class='shadowed' src='pieces/Group 30.png'>
+		<img data-match='31' class='shadowed' src='pieces/Group 31.png'>
+		<img data-match='32' class='shadowed' src='pieces/Group 32.png'>
+		<img data-match='33' class='shadowed' src='pieces/Group 33.png'>
+
+
+
+
+
 		</div>
 	</div>
 
@@ -116,7 +132,6 @@
 	}
 
 	.puzzleCanvas {
-		border: 2px solid green;
 		width: 868px;
 		height: 579px;
 		position: absolute;
@@ -190,7 +205,7 @@
 	}
 
 	.shadowed {
-    	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.3));
+    	filter: drop-shadow(6px 4px 2px rgba(0,0,0,0.5));
     	position: absolute;
     	z-index: 20;
 	}
@@ -332,6 +347,25 @@
 		border: 2px solid black;
 	}
 
+	img[data-match="30"]{
+		border: 2px solid red;
+	}
+
+	img[data-match="31"]{
+		border: 2px solid fuchsia;
+	}
+
+	img[data-match="32"]{
+		border: 2px solid yellow;
+	}
+
+	img[data-match="33"]{
+		border: 2px solid orange;
+	}
+
+
+
+
 	/*position puzzle container divs*/
 	div[data-match]{
 		width: 110px;
@@ -342,13 +376,13 @@
 	/*************************************************/
 
 	div[data-match='05']{
-		bottom: 145px;
+		bottom: 147px;
 		left: 658px;
 		background-color: purple;
 	}
 
 	div[data-match='06']{
-		bottom: 242px;
+		bottom: 244px;
 		left: 658px;
 		background-color: blue;
 	}
@@ -360,7 +394,7 @@
 	}
 
 	div[data-match='08']{
-		bottom: 195px;
+		bottom: 197px;
     	left: 574px;
 		background-color: darkorange;
 	}
@@ -474,16 +508,41 @@
 	}
 
 	div[data-match='28']{
-		bottom: 338px;
+		bottom: 341px;
 		left: 658px;
 		background-color: beige;
 	}
 
 	div[data-match='29']{
-		bottom: 433px;
+		bottom: 438px;
 		left: 658px;
 		background-color: black;
 	}
+
+	div[data-match='30']{
+		left: 579px;
+		bottom: 293px;
+		background-color: red;
+	}
+
+	div[data-match='31']{
+		bottom: 389px;
+		left: 578px;
+		background-color: fuchsia;
+	}
+
+	div[data-match='32']{
+		left: 495px;
+		bottom: 341px;
+		background-color: yellow;
+	}
+
+	div[data-match='33']{
+		left: 495px;
+		bottom: 438px;
+		background-color: orange;
+	}
+
 
 	div[data-occupied="true"] {
 	  border: 5px dashed red;
