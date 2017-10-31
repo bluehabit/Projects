@@ -1,0 +1,87 @@
+<html>
+	<h2>setInterval Timer</h2>
+	<h3>with Progress Bar</h3>
+
+	<div>
+		<p class='time'>0:00</p>
+	</div>
+
+	<button>Start Time</button>
+
+	<br>
+	<br>
+
+	<div class='parentProgress'>
+		<div class='progress'>
+	</div>
+</html>
+
+<style>
+
+.parentProgress {
+	width: 400px;
+	height: 20px;
+	background-color: blue;
+}
+
+.progress {
+	width: 100%;
+	height: 20px;
+	background-color: pink;
+	transition: all 2s ease;
+}
+
+</style>
+
+<script>
+
+var timeResult = document.querySelector('.time');
+var startButton = document.querySelector('button');
+var myTime = 300000;
+var originalTime = myTime;
+
+var progressBar = document.querySelector('.progress');
+
+function convertTime(milliseconds){
+	var time = {
+		milliseconds: (milliseconds.toFixed(0)%1000),
+		seconds: Math.floor((milliseconds/1000)%60),
+		minutes: Math.floor((milliseconds/(1000 * 60))),
+	};
+
+	return time; 
+}
+
+startButton.addEventListener('click', function(){
+	progressBar.style.width = '100%'
+	startTimer();
+})
+
+
+function startTimer(){
+	var countDown = setInterval(function(){ 
+		myTime = myTime - 1000;
+		var displayTime = convertTime(myTime)
+		displayTime.seconds = displayTime.seconds.toString();
+
+		if(displayTime.seconds < 10){
+			displayTime.seconds = `0${displayTime.seconds}`;
+		}
+
+		progressBar.style.width = `${(myTime/originalTime)*100}%`
+		timeResult.textContent = `${displayTime.minutes}:${displayTime.seconds}`
+		
+		if(myTime === 0){
+			console.log('Countdown complete')
+			clearInterval(countDown)
+		}
+	}, 1000);
+}
+
+//use the rawtime measurement to measure progress
+//so lets say your timer is 6 min or 360000 ms
+//and lets say the current time is 5 min 30 seconds or 330000
+//330000/36000 = .91 * 100 = 91%
+//so your div would be at 91% width of the parent
+//and would decrease from there
+</script>
