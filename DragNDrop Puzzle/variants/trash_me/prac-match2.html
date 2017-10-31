@@ -1,0 +1,41 @@
+<div class='temp'>
+	<img class='shadowed' src='pieces/Group 5.png'>
+<!-- 	<img class='shadowed' src='pieces/Group 6.png'> -->
+</div>
+
+<style>	
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
+
+
+</style>
+
+<script>
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var test = puzzlePieces[0]
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	piece.addEventListener('click', swapPiece)
+	piece.addEventListener('mousemove', grabPiece)
+});
+
+function swapPiece(e){
+	var target = e.target
+	target.clicked = !target.clicked
+}
+
+function grabPiece(e){
+	var target = e.target
+	if(target.clicked){
+		target.style.left = e.clientX - 55;
+		target.style.top =  e.clientY - 55;
+	}else{
+		return 
+	}
+}
+</script>
+

@@ -1,0 +1,268 @@
+<h2>Match DIV to Container</h2>
+
+<div class='temp'>
+	<img data-match='01' class='shadowed' src='pieces/Group 5.png'>
+	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+<!-- 	<img data-match='01' data-inSlot='' class='shadowed' src='pieces/Group 5.png'> -->
+</div>
+
+<br>
+<br>
+<br>
+
+<div data-match='01' data-occupied='false' class='match'></div>
+
+<br>
+<br>
+<br>
+
+<div data-match='27' data-occupied='false' class='match'></div>
+
+<style>	
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
+
+img[data-match="01"]{
+	border: 2px solid purple;
+	left: 350px;
+}
+
+img[data-match="27"]{
+	border: 2px solid yellow;
+	left: 220px;
+}
+
+.match {
+	background-color: purple;
+	width: 110px;
+	height: 95px;
+	margin-left: 50px;
+}
+
+div[data-match="27"]{
+	background-color: yellow;
+}
+
+.highZindexValue {
+	z-index: 99;
+}
+
+body {
+	user-select: none;
+}
+
+</style>
+
+<script>
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var divContainers = document.querySelectorAll('div.match');
+
+//initialize the counter
+var counter = checkMatch();
+
+var hoof = new Audio('sounds/dshoof.wav');
+hoof.volume = .32;
+
+var pickup = new Audio('sounds/dsitemup.wav');
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	//set default value of piece.clicked to false
+	piece.addEventListener('click', selectPiece)
+	piece.addEventListener('mousemove', grabPiece)
+});
+
+
+function selectPiece(e){
+	this.clicked = !this.clicked
+	if(this.clicked){
+		pickup.play();
+		this.classList.toggle('highZindexValue');
+	} else {
+		hoof.play();
+		this.classList.toggle('highZindexValue');
+	}
+
+	for(var i = 0; i < divContainers.length; i++){
+		var currentDiv = divContainers[i];
+		var divBoundary = currentDiv.getBoundingClientRect();
+		if(checkBoundary(this, currentDiv, divBoundary)) {	
+			console.log(this)
+			counter(this, currentDiv); 	
+			lockPiece(this, divBoundary);
+		} 
+	}
+}
+
+//divContainers needs to hold a BOUNDARY
+// function boardState(puzzlePieces, divContainers){
+// 	debugger;
+// 	for(var i = 0; i < puzzlePieces.length; i++){
+// 			// console.log(puzzlePieces[i]);
+// 		for(var j = 0; j < divContainers.length; j++){
+// 			if(checkBoundary(puzzlePieces[i], divContainers[j].getBoundingClientRect())){
+// 				divContainers[j].dataset.occupied = 'true'
+// 			} else {
+// 				divContainers[j].dataset.occupied = 'false'
+// 			}
+// 		}
+// 	}
+// }
+
+// function boardState(puzzlePieces, divContainers){
+// 	var ghost = 'boo'
+// 	for(var i = 0; i < divContainers.length; i++){
+// 		var currentDiv = divContainers[i];
+// 		// console.log(currentDiv.getBoundingClientRect());
+
+// 		for(var j = 0; j < puzzlePieces.length; j++){
+// 			if(checkBoundary(puzzlePieces[j], currentDiv.getBoundingClientRect())){
+// 				console.log('this is never firing')
+// 				currentDiv.dataset.occupied = 'true';
+// 			} 
+// 			console.log(puzzlePieces[j])
+// 		}
+
+// 	}
+// }
+
+// function boardState(puzzlePieces, divContainers){
+// 	divContainers.forEach(function(container){
+// 		var divBoundary = container.getBoundingClientRect();
+// 		// var hits = 0;
+// 		for(var i = 0; i < puzzlePieces.length; i++){
+// 			if(checkBoundary2(puzzlePieces[i], container, divBoundary)){
+// 				container.dataset.occupied = 'true';
+// 			} else {
+// 				container.dataset.occupied = 'false';
+// 			}
+// 		}
+// 	});
+// 	//problem is it will only match one of them, then exit
+// }
+
+var test = puzzlePieces[0]
+
+function boardState(divContainers){
+	divContainers.forEach(function(container){
+		console.log(container.dataset.occupied)
+	});
+}
+
+function occupied(divContainers){
+	divContainers.forEach(function(){
+		checkBoundary()
+	});
+}
+
+
+
+//original
+// function checkBoundary(puzzlePiece, divBoundary){
+// 	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+// 		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+// 		&& !puzzlePiece.clicked) {	
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
+
+
+//augmented 1
+// function checkBoundary(puzzlePiece, currentDiv, divBoundary){
+// 	var currentDiv = currentDiv;
+// 	var result; 
+
+// 	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+// 		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+// 		&& !puzzlePiece.clicked) {	
+// 		console.log(currentDiv);
+// 		console.log('yyYYyyy')
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
+
+//augmented 2
+function checkBoundary(puzzlePiece, currentDiv, divBoundary){
+	var currentDiv = currentDiv;
+	var result; 
+
+	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+		&& !puzzlePiece.clicked) {	
+		console.log(currentDiv);
+		console.log('yyYYyyy')
+	} else {
+		return false;
+	}
+}
+
+function checkBoundary2(puzzlePiece, currentDiv, divBoundary){
+	var currentDiv = currentDiv;
+	var result; 
+
+	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+		&& !puzzlePiece.clicked) {	
+		console.log(currentDiv);
+		console.log('yyYYyyy')
+		result = currentDiv;
+	} 
+
+	return result; 
+}
+
+
+
+// function boardState(puzzlePieces, divContainers){
+// 	for(var i = 0; i < divContainers.length; i++){
+// 			var currentDiv = divContainers[i];
+// 		for(var j = 0; j < puzzlePieces.length; j++){
+// 			// console.log(puzzlePieces[j]);
+// 			if(checkBoundary(puzzlePieces[j], currentDiv.getBoundingClientRect())){
+// 				currentDiv.dataset.occupied = 'true';
+// 			} else {
+// 				currentDiv.dataset.occupied = 'true';
+// 			}
+// 		}
+// 	}
+// }
+
+function grabPiece(e){
+	if(this.clicked){
+		this.style.left = e.clientX - 61 + 'px';
+		this.style.top =  e.clientY - 61 + 'px';
+	}
+}
+
+function lockPiece(puzzlePiece, divHolder){
+	puzzlePiece.style.top = divHolder.top + 'px';
+	puzzlePiece.style.left = divHolder.left + 'px';
+}
+
+function between(input, min, max) {
+  return input >= min && input <= max;
+}
+
+function checkMatch(){
+	var total = 0;
+	return function(puzzlePiece, div){
+		if((puzzlePiece.dataset.match)===(div.dataset.match)){
+				console.log('match!')
+				total++; 
+		} else {
+				total--;
+		}
+		console.log(total);
+		return total;
+	}
+}
+
+</script>
+

@@ -1,0 +1,103 @@
+<button>click me</button>
+
+<script>
+// var myButton = document.querySelector('button');
+
+// myButton.addEventListener('click', function(){
+// 	var myName = 'Chris'
+
+// 	return function(){
+// 		return console.log(myName, ': this is now a closure')
+// 	}();
+// });
+
+// myButton.addEventListener('click', myFunc);
+
+// function myFunc(){
+// 	var myDog = 'spot';
+
+// 	return function(){
+// 		debugger;
+// 		return console.log('My dogs name is ' + myDog);
+// 	}();
+// 	//have to call the anonymous function right away with ()
+// }
+
+
+
+//method 1
+// var coordinates = function(){
+//     var coordinates;
+//     window.addEventListener('mousemove', function(e) {
+//         coordinates = {x: e.clientX, y: e.clientY};
+//     });
+//     return function(){ 
+//     	return coordinates; 
+//     };
+// };
+
+// //method 2
+// var userCoords = coordinates();
+
+
+
+
+//method 2
+// var userCoords = coordinates();
+
+
+
+
+
+// -> {x: 675, y: 570}
+//instead of storing it in a global variable
+//we store it in a function now, we get the coordinates
+//with coordinates()
+
+
+//is this an example of a callback?
+// function getCoords(c){
+// 	var c = c();
+// 	console.log('x:'+ c.x, 'y:' + c.y)
+// }
+//getCoords(coordinates)
+//-> x:489 y:567
+
+
+//method2 
+//how to access currentCord in this IIFE?
+// (function() {
+
+//   var currentCord;
+//   //currentCord.x 
+//   //currentCord.y
+
+//   var myCoordinates = function() {
+//       return currentCord;
+//   };
+
+//   window.addEventListener('mousemove', function(e){
+//       var mouseCoord = {
+//           x: e.clientX,
+//           y: e.clientY
+//       }
+
+//       currentCord = mouseCoord;
+//       // console.log(currentCord)
+//   });
+
+// })();
+
+
+// function counter(){
+// 	var count = 0;
+
+// 	return function(){
+// 		return ++count;
+// 	}
+// }
+
+// var countTotal = counter();
+
+
+</script>

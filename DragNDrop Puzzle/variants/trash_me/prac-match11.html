@@ -1,0 +1,157 @@
+<h2>Puzzle Piece now locks onto DIV</h2>
+
+<div class='temp'>
+	<img data-match='01' data-oc='' class='shadowed' src='pieces/Group 5.png'>
+	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+<!-- 	<img data-match='01' data-inSlot='' class='shadowed' src='pieces/Group 5.png'> -->
+</div>
+
+<br>
+<br>
+<br>
+
+<div data-match='01' class='match'></div>
+
+<br>
+<br>
+<br>
+
+<div data-match='27' class='match'></div>
+
+<style>	
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
+
+img[data-match="01"]{
+	border: 2px solid yellow;
+}
+
+img[data-match="27"]{
+	border: 2px solid purple;
+}
+
+.match {
+	background-color: purple;
+	width: 110px;
+	height: 95px;
+	margin-left: 50px;
+}
+
+div[data-match="27"]{
+	background-color: yellow;
+}
+
+.highZindexValue {
+	z-index: 99;
+}
+
+body {
+	user-select: none;
+}
+
+</style>
+
+<script>
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var divHolders = document.querySelectorAll('div.match');
+var totalMatches = 0;
+var win = divHolders.length;
+
+var piece = puzzlePieces[0]
+var attribute = piece.getAttribute('data-match');
+var otherWay = Number(piece.dataset.match)
+
+var myDiv = divHolders[0]
+var divAttribute = Number(piece.dataset.match)
+
+
+var hoof = new Audio('sounds/dshoof.wav')
+var pickup = new Audio('sounds/dsitemup.wav')
+
+var matchDiv = document.querySelector('.match');
+var mD = matchDiv.getBoundingClientRect()
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	//set default value of piece.clicked to false
+	piece.addEventListener('click', selectPiece)
+	piece.addEventListener('mousemove', grabPiece)
+});
+
+function selectPiece(e){
+	this.clicked = !this.clicked
+	if(this.clicked){
+		pickup.play();
+		this.classList.toggle('highZindexValue');
+	} else {
+		hoof.play();
+		this.classList.toggle('highZindexValue');
+	}
+
+
+	for(var i = 0; i < divHolders.length; i++){
+		var currentDiv = divHolders[i];
+		var divBoundary = currentDiv.getBoundingClientRect();
+
+		if(between(this.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+			&& between(this.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+			&& !this.clicked) {	
+			checkMatch(this, currentDiv);	
+			lockPiece(this, divBoundary);
+		}
+	}
+}
+
+function grabPiece(e){
+	// var target = e.target
+	if(this.clicked){
+		this.style.left = e.clientX - 55;
+		this.style.top =  e.clientY - 55;
+	}
+}
+//I think the reason I can use 'this' here and it be the HTML element object
+//and not the window is because its being called from an event listener. Try
+//it on a smaller scale project
+
+function lockPiece(puzzlePiece, divHolder){
+	puzzlePiece.style.top = divHolder.top;
+	puzzlePiece.style.left = divHolder.left;
+}
+
+function between(input, min, max) {
+  return input >= min && input <= max;
+}
+
+function checkMatch(puzzlePiece, divHolder){
+	if((Number(puzzlePiece.dataset.match)) === (Number(divHolder.dataset.match))){
+			console.log('match!')
+			totalMatches++; 
+			console.log(totalMatches)
+	} else {
+			totalMatches--;
+			console.log(totalMatches)
+	}
+}
+
+// function totalScore(){
+
+// 	return on checkBoardState(){
+// }
+
+
+//if matches === divHolders.length, win!
+
+// for(var i = 0; i < divHolders.length; i++){
+
+// }
+
+
+for(var i = 0; i < divHolders.length; i++){
+	var currentDiv = divHolders[i].getBoundingClientRect();
+}
+
+</script>
+

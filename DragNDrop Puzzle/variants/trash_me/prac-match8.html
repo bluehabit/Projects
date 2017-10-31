@@ -1,0 +1,107 @@
+<h2>Puzzle Piece now locks onto DIV</h2>
+
+<div class='temp'>
+	<img data-match='01' class='shadowed' src='pieces/Group 5.png'>
+</div>
+<div class='temp'>
+	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+</div>
+
+<br>
+<br>
+<br>
+
+<div data-match='01' class='match'></div>
+
+<br>
+<br>
+<br>
+
+<div data-match='27' class='match'></div>
+
+<style>	
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
+
+img[data-match="01"]{
+	border: 2px solid yellow;
+}
+
+img[data-match="27"]{
+	border: 2px solid purple;
+}
+
+.match {
+	background-color: purple;
+	width: 110px;
+	height: 95px;
+	margin-left: 50px;
+}
+
+div[data-match="27"]{
+	background-color: yellow;
+}
+
+body {
+	user-select: none;
+}
+
+</style>
+
+<script>
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var hoof = new Audio('sounds/dshoof.wav')
+var pickup = new Audio('sounds/dsitemup.wav')
+
+var matchDiv = document.querySelector('.match');
+var mD = matchDiv.getBoundingClientRect()
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	//set default value of piece.clicked to false
+	piece.addEventListener('click', selectPiece)
+	piece.addEventListener('mousemove', grabPiece)
+});
+
+function selectPiece(e){
+	var target = e.target
+	target.clicked = !target.clicked
+	if(target.clicked){
+		pickup.play();
+	} else {
+		hoof.play();
+	}
+
+	if(between(target.getBoundingClientRect().x, mD.left - 50, mD.right) 
+		&& between(target.getBoundingClientRect().y, mD.top - 105, mD.bottom - 35) 
+		&& !target.clicked){	
+		lockPiece(target);
+	}
+}
+
+function grabPiece(e){
+	var target = e.target
+	if(target.clicked){
+		target.style.left = e.clientX - 55;
+		target.style.top =  e.clientY - 55;
+	}
+}
+
+function lockPiece(element){
+	element.style.top = mD.top;
+	element.style.left = mD.left;
+}
+
+function between(input, min, max) {
+  return input >= min && input <= max;
+}
+
+function checkBoardState(){
+
+}
+
+</script>
+

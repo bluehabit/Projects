@@ -1,0 +1,34 @@
+<div class='temp'>
+	<img class='shadowed' src='pieces/Group 5.png'>
+<!-- 	<img class='shadowed' src='pieces/Group 6.png'> -->
+</div>
+
+
+<style>
+	
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
+
+</style>
+
+<script>
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+
+puzzlePieces.forEach(function(piece){
+	piece.addEventListener('click', function(e){
+		this.addEventListener('mousemove', function(e){
+		this.style.left = e.clientX - 55;
+		this.style.top = e.clientY - 55;
+		//have to buffer the e.clientX and e.clientY values
+		//so the mouse is in the middle of the element
+		});
+	});
+})
+
+
+
+
+</script>

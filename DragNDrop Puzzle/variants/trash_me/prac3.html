@@ -1,0 +1,33 @@
+
+<button>click me</button>
+
+<script>
+// var myButton = document.querySelector('button');
+
+// myButton.addEventListener('click', function(){
+// 	var myDog = 'spot'
+	
+// 	return function(){
+// 		debugger;
+// 		console.log('I love my dog ' + myDog);
+// 	}();
+// })
+
+var coordinates = function(){
+    var coordinates;
+    window.addEventListener('mousemove', function(e) {
+        coordinates = {x: e.clientX, y: e.clientY};
+    });
+    return function(){ 
+        return coordinates; 
+    }
+};
+
+var userCoords = coordinates();
+//userCoords();
+//{x: 380, y: 529}
+
+
+
+</script>
+

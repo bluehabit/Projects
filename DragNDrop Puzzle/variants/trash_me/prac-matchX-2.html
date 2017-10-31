@@ -1,0 +1,185 @@
+<h2>Match DIV to Container</h2>
+
+<div class='temp'>
+	<img data-match='01' class='shadowed' src='pieces/Group 5.png'>
+	<img data-match='27' class='shadowed' src='pieces/Group 27.png'>
+<!-- 	<img data-match='01' data-inSlot='' class='shadowed' src='pieces/Group 5.png'> -->
+</div>
+
+<br>
+<br>
+<br>
+
+<div data-match='01' data-occupied='false' class='match'></div>
+
+<br>
+<br>
+<br>
+
+<div data-match='27' data-occupied='false' class='match'></div>
+
+<p>test</p>
+
+<style>	
+
+* {
+	box-sizing: border-box;
+}
+
+.temp > img {
+	position: absolute;
+	border: 2px solid red;
+}
+
+img[data-match="01"]{
+	border: 2px solid purple;
+	left: 350px;
+}
+
+img[data-match="27"]{
+	border: 2px solid yellow;
+	left: 220px;
+}
+
+.match {
+	background-color: purple;
+	width: 110px;
+	height: 95px;
+	margin-left: 50px;
+}
+
+div[data-match="27"]{
+	background-color: yellow;
+}
+
+.highZindexValue {
+	z-index: 99;
+}
+
+body {
+	user-select: none;
+}
+
+div[data-occupied="true"] {
+  border: 5px dashed red;
+}
+
+</style>
+
+<script>
+
+var puzzlePieces = document.querySelectorAll('.temp > img');
+var divContainers = document.querySelectorAll('div.match');
+
+//initialize the counter
+// var counter = checkMatch();
+
+var hoof = new Audio('sounds/dshoof.wav');
+hoof.volume = .32;
+
+var pickup = new Audio('sounds/dsitemup.wav');
+
+puzzlePieces.forEach(function(piece){
+	piece.clicked = false;
+	//set default value of piece.clicked to false
+	piece.addEventListener('click', selectPiece)
+	piece.addEventListener('mousemove', grabPiece)
+});
+
+
+function selectPiece(e){
+	var puzzlePiece = this;
+
+	this.clicked = !this.clicked
+	if(this.clicked){
+		pickup.play();
+		this.classList.toggle('highZindexValue');
+	} else {
+		hoof.play();
+		this.classList.toggle('highZindexValue');
+	}
+
+	resetDivContainers();
+	boardState();
+
+	divContainers.forEach(function(container){
+		if(checkBoundary(puzzlePiece, container)){
+			lockPiece(puzzlePiece, container);
+			checkWin();
+		}
+	});
+}
+
+function boardState(){
+	divContainers.forEach(function(divContainer){
+		puzzlePieces.forEach(function(puzzlePiece){
+			if (checkBoundary(puzzlePiece, divContainer)) {
+			console.log(divContainer);
+        	divContainer.dataset.occupied = "true";
+      		}
+		})
+	})
+}
+
+function resetDivContainers(){
+	divContainers.forEach(function(divContainer){
+		divContainer.dataset.occupied = "false";
+	})
+}
+
+
+function checkBoundary(puzzlePiece, currentDiv){
+	var currentDiv = currentDiv;
+	var divBoundary = currentDiv.getBoundingClientRect();
+
+	if(between(puzzlePiece.getBoundingClientRect().x, divBoundary.left - 50, divBoundary.right) 
+		&& between(puzzlePiece.getBoundingClientRect().y, divBoundary.top - 105, divBoundary.bottom - 35) 
+		&& !puzzlePiece.clicked) {	
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function grabPiece(e){
+	if(this.clicked){
+		this.style.left = e.clientX - 61 + 'px';
+		this.style.top =  e.clientY - 61 + 'px';
+	}
+}
+
+function lockPiece(puzzlePiece, divContainer){
+		var divBoundary = divContainer.getBoundingClientRect();
+		puzzlePiece.style.top = divBoundary.top + 'px';
+		puzzlePiece.style.left = divBoundary.left + 'px';
+}
+
+function between(input, min, max) {
+  return input >= min && input <= max;
+}
+
+function checkWin(){
+	var total = 0;
+	divContainers.forEach(function(container){
+		puzzlePieces.forEach(function(puzzlePiece){
+			if(checkBoundary(puzzlePiece, container) && puzzlePiece.dataset.match === container.dataset.match){
+				total++;
+			}
+		})
+	})
+	
+	if(total === divContainers.length){
+		console.log('you win')
+	}
+}
+
+
+// var test = document.querySelector('p');
+// test.dataset.contained = ''
+
+// if(!test.dataset.contained){
+// 	console.log('yup its empty')
+// }
+
+</script>
+
