@@ -1,0 +1,197 @@
+	@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+	@font-face {
+  	font-family: 'Doom', serif;
+  	src: url('AmazDooMLeft.ttf'); 
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeOut {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	body {
+		user-select: none;
+		overflow: hidden;
+	}
+
+	html {
+		background-color: #2a2a2a;
+		font-family: 'Orbitron', sans-serif;
+		font-size: 1.2em;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+
+	.helperBar {
+		background-color: #413f3f;
+		height: 50px;
+		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
+	}
+
+	.puzzleCanvas {
+		width: 868px;
+		height: 579px;
+		position: absolute;
+		margin: 0 auto;
+	}
+
+	.puzzleSolved, .puzzleUnsolved, .puzzlePiece {
+		box-shadow: 10px 10px 5px 1px rgba(0,0,0,0.16);
+	}
+
+	.puzzleSolved, .puzzleUnsolved {
+		z-index: 0;
+	}
+
+	.puzzleUnsolved {
+		animation: fadeIn 2s ease;
+	}
+
+	.fade {
+		animation: fadeIn 2s ease;
+	}
+
+	.mainContainer {
+		width: 860px;
+		margin: 0 auto;
+		margin-top: 12px;
+		height: 579px;
+	}	
+
+	.startPuzzle, .hint {
+		display: block;
+		width: 250px;
+		margin: 0 auto;
+		margin-top: 5px;
+		text-transform: uppercase;
+		animation: fadeIn 2s ease;
+	}
+
+	.startPuzzle {
+		position: relative;
+		bottom: 3px;
+		line-height: 2px;
+	}
+
+	.hint, .reset {
+		width: 105px;
+    	height: 50px;
+		line-height: 2px;
+		float: left;
+		margin-top: 0;
+	}
+
+	.reset {
+		float: right;
+	}
+
+	.difficultyContainer > button {
+		display: block;
+		width: 55%;
+		margin: 0 auto;
+		margin-bottom: 27px;
+	}
+
+	.difficultyContainer {
+		position: relative;
+		width: 425px;
+		margin: 0 auto;
+		top: 20%;
+		z-index: 500;
+		position: relative;
+	}
+
+	button {
+		cursor: pointer;
+		font-family: 'Orbitron', sans-serif;
+		font-size: .89em;
+		transition: all .2s ease;
+		border: 2px solid white;
+		opacity: .85;
+		padding: 21px;
+	}
+
+	button:hover {
+		opacity: 1;
+		background-color: #ec1d88;
+	}
+
+	button:focus {
+		outline:0;
+	}
+
+	h2 {
+		color: white;
+		text-align: center;
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	.shadowed {
+    	filter: drop-shadow(12px 14px 2px rgba(0,0,0,0.5));
+    	position: absolute;
+    	z-index: 2;
+	}
+
+	.noShadow {
+		filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
+	}
+
+	.appearOnTop {
+		z-index: 10;
+	}
+
+	/*///////////////////new rules//////////////////*/
+
+	.match {
+		background-color: grey;
+		width: 110px;
+		height: 95px;
+		margin-left: 50px;
+	}
+
+	.highZindexValue {
+		z-index: 99;
+	}
+
+	.lowZindexValue {
+		z-index: 1;
+		border: 2px solid green;
+	}
+
+	.babyContainer {
+		width: 868px;
+		height: 245px;
+	}
+
+	body {
+		user-select: none;
+	}
