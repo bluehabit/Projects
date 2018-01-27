@@ -9,6 +9,8 @@ var pipeNorth = new Image();
 var pipeSouth = new Image();
 var fourk = new Image();
 
+console.log('hey')
+
 bird.src = "images/bird.png";
 bg.src = "images/bg.png";
 fg.src = "images/fg.png";
@@ -16,7 +18,7 @@ pipeNorth.src = "images/pipeNorth.png";
 pipeSouth.src = "images/pipeSouth.png";
 
 //variables
-var gap = 85;
+var gap = 85;   
 var constant;
 var score = 0;
 
@@ -35,11 +37,12 @@ bing.src = "sounds/score.mp3";
 document.addEventListener('keydown', moveUp);
 
 function moveUp(){
+	bird.src = "images/flap.png"
 	by -= 25;
 	fly.play();
 }
 
-//pipe coordinates
+//pipe, array of objects
 var pipe = [];
 
 pipe[0] = {
@@ -75,11 +78,12 @@ function draw(){
 		 	by + bird.height >=  cvs.height - fg.height){
             location.reload(); // reload the page
         }
-
+     
         //if pass through a pipe increase score
-        if(pipe[i].x === 5){
+        if(pipe[i].x === 55){
         	score ++;
         	bing.play();
+        	console.log(pipe.length)
         }
 
 	}
