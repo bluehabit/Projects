@@ -42,6 +42,7 @@
 
 var taskInput = document.getElementById("new-task");
 var addButton = document.getElementsByTagName("button")[0];
+
 var incompleteTasksHolder = document.getElementById("incomplete-tasks");
 var completedTasksHolder = document.getElementById("completed-tasks");
 
@@ -153,9 +154,10 @@ function taskIncomplete(inputElement) {
 }
 
 //checkBoxEventHandler holds the value of a function definition
-//either taskIncomplete or taskComplete, it is a callback, since
+//EITHER taskIncomplete or taskComplete, it is a callback, since
 //we are passing a function definition as a parameter to
 //another function
+
 function bindTaskEvents(taskListItem, checkBoxEventHandler) {
   console.log(checkBoxEventHandler)
   console.log("Bind list item events");
@@ -200,8 +202,6 @@ for(var i = 0; i <  completedTasksHolder.children.length; i++) {
   bindTaskEvents(completedTasksHolder.children[i], taskIncomplete); 
 
 }
-
-
 
 
 </script>
