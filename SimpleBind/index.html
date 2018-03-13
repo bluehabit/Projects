@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Version</title>
+</head>
+<body>
+	<div class='mainContainer'>
+		<h3>Add Item</h3>
+		<input id='addItem' type="text">
+		<button>add</button>
+		
+		<h1>Check Console for Binded Items</h1>
+		<h3>To Do</h3>
+		<ul class='incomplete-tasks'>
+			<li>
+				<input type="checkbox">
+				<label>Pay Bills</label>
+				<input type='text'>
+				<button class='edit'>edit</button>
+				<button class='delete'>delete</button>
+			</li>
+			<li>
+				<input type="checkbox">
+				<label>Go Shopping</label>
+				<input type='text'>
+				<button class='edit'>edit</button>
+				<button class='delete'>delete</button>
+			</li>
+		</ul>
+
+		<h3>Completed</h3>
+		<ul class='completed-tasks'>
+			<li>
+				<input type="checkbox">
+				<label>Pay Bills</label>
+				<input type='text'>
+				<button class='edit'>edit</button>
+				<button class='delete'>delete</button>
+			</li>
+		</ul>
+	</div><!--end mainContainer-->
+</body>
+</html>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+h3 {
+	border-bottom: 2px solid black;
+	display: block;
+}
+
+.mainContainer {
+	max-width: 70%;
+	margin: 0 auto;
+	margin-top: 15%;
+}
+
+ul li {
+	list-style: none;
+	padding-bottom: 25px;
+	padding-top: 5px;
+	border-bottom: 1px solid #d8d9da;
+}
+
+ul li button {
+	float: right;
+}
+
+button {
+	margin-right: 5px;
+	background-color: #e02280;
+	border: none;
+	padding: 8px;
+	border: 2px solid #c6c6c6;
+	color: white;
+	font-size: 12px;
+	text-transform: uppercase;
+	transition: all .2s ease;
+}
+
+button:hover{
+	background-color: #f66eab;
+}
+
+label {
+	font-size: 1.2em;
+	color: #24262a;
+}
+
+input {
+	border: 1.3px solid #cbcbcb;
+	border-radius: 6px;
+	font-family: 'Lato', sans-serif;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.editMode {
+	display: none;
+}
+
+</style>
+
+<script>
+var completedTasks = document.querySelector('.completed-tasks');
+var incompleteTasks = document.querySelector('.incomplete-tasks');
+
+var completedLi = Array.from(completedTasks.children);
+var incompleteLi = Array.from(incompleteTasks.children)
+
+completedLi.forEach(function(child){
+	bindEvents(child);
+})
+
+incompleteLi.forEach(function(child){
+	bindEvents(child);
+})
+
+function bindEvents(child){
+	var liContainer = child;
+	var checkBox = child.querySelector('input[type="checkbox"]');
+	var deleteButton = liContainer.querySelector('button.delete');
+	var editButton = liContainer.querySelector('button.edit');
+	
+	deleteButton.addEventListener('click', function(){
+		console.log(this, 'clicked')
+	})
+
+	editButton.addEventListener('click', function(){
+		console.log(this, 'clicked')
+	})
+}
+
+</script>
