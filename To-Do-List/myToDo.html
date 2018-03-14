@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Version</title>
+</head>
+<body>
+	<div class='mainContainer'>
+		<h3>Add Item</h3>
+		<input id='addItem' type="text">
+		<button id='addItemButton'>add</button>
+
+		<h1>Check Console for Binded Items</h1>
+		<h3>To Do</h3>
+		<ul class='incomplete-tasks'>
+			<li>
+				<input type="checkbox">
+				<label>Pay Bills</label>
+				<input class='editMode' type='text'>
+				<button class='edit'>edit</button>
+				<button class='delete'>delete</button>
+			</li>
+			<li>
+				<input type="checkbox">
+				<label>Go Shopping</label>
+				<input class='editMode' type='text'>
+				<button class='edit'>edit</button>
+				<button class='delete'>delete</button>
+			</li>
+		</ul>
+
+		<h3>Completed</h3>
+		<ul class='completed-tasks'>
+			<li>
+				<input type="checkbox">
+				<label>Go Bowling</label>
+				<input class='editMode' type='text'>
+				<button class='edit'>edit</button>
+				<button class='delete'>delete</button>
+			</li>
+		</ul>
+	</div><!--end mainContainer-->
+</body>
+</html>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+h3 {
+	border-bottom: 2px solid black;
+	display: block;
+}
+
+.mainContainer {
+	max-width: 70%;
+	margin: 0 auto;
+	margin-top: 15%;
+}
+
+ul li {
+	list-style: none;
+	padding-bottom: 25px;
+	padding-top: 5px;
+	border-bottom: 1px solid #d8d9da;
+}
+
+ul li button {
+	float: right;
+}
+
+button {
+	margin-right: 5px;
+	background-color: #e02280;
+	border: none;
+	padding: 8px;
+	border: 2px solid #c6c6c6;
+	color: white;
+	font-size: 12px;
+	text-transform: uppercase;
+	transition: all .2s ease;
+}
+
+button:hover{
+	background-color: #f66eab;
+}
+
+label {
+	font-size: 1.2em;
+	color: #24262a;
+}
+
+input {
+	border: 1.3px solid #cbcbcb;
+	border-radius: 6px;
+	font-family: 'Lato', sans-serif;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.editMode {
+	visibility: hidden;
+}
+
+</style>
+
+<script>
+var completedTaskHolder = document.querySelector('.completed-tasks');
+var incompleteTaskHolder = document.querySelector('.incomplete-tasks');
+
+var completedLi = Array.from(completedTaskHolder.children);
+var incompleteLi = Array.from(incompleteTaskHolder.children)
+
+var addNewItem = document.getElementById('addItem');
+var addNewItemButton = document.getElementById('')
+
+completedLi.forEach(function(child){
+	bindEvents(child);
+})
+
+incompleteLi.forEach(function(child){
+	bindEvents(child);
+})
+
+function bindEvents(child){
+	var liContainer = child;
+	var checkBox = child.querySelector('input[type="checkbox"]');
+	var deleteButton = liContainer.querySelector('button.delete');
+	var editButton = liContainer.querySelector('button.edit');
+	
+	deleteButton.addEventListener('click', function(){
+		deleteTask(this);
+	})
+
+	editButton.addEventListener('click', function(){
+		editTask(this);
+	})
+
+	checkBox.addEventListener('click', function(){
+		checkBoxHandler(this);
+	})
+}
+
+function checkBoxHandler(checkBox){
+	console.log(checkBox)
+	var parent = checkBox.parentElement.parentElement;
+	var child = checkBox.parentElement;
+
+	if(checkBox.checked && parent.classList.contains('incomplete-tasks')){
+		parent.removeChild(child)
+		completedTaskHolder.appendChild(child);
+		checkBox.checked = false;
+	}
+
+	if(checkBox.checked && parent.classList.contains('completed-tasks')){
+		parent.removeChild(child)
+		incompleteTaskHolder.appendChild(child);
+		checkBox.checked = false;
+	}
+}
+
+function deleteTask(item){
+	var parent = item.parentElement.parentElement
+	var child = item.parentElement;
+	parent.removeChild(child);
+}
+
+function editTask(item){
+	var parent = item.parentElement; 
+	var inputText = parent.querySelector('input[type="text"]');
+	var parentLabel = parent.querySelector('label')
+
+	if(!inputText.value){
+		inputText.classList.toggle('editMode');
+	} else {
+		parentLabel.innerText = inputText.value;
+		inputText.classList.toggle('editMode');
+	}
+
+	console.log(parentLabel.innerText)
+}
+
+function addItem(item){
+	var newLi = document.createElement('li')
+	var checkBox = document.createElement('input');
+	checkBox.type='checkBox';
+
+	var label = document.createElement('label');
+	label.innerText = addNewItem.value;
+
+	var inputText = document.createElement('input');
+	inputText.type ='text';
+	inputText.classList.add('editMode');
+
+	var editButton = document.createElement('button');
+	editButton.classList.add('edit');
+	editButton.innerText = 'edit';
+
+	var deleteButton = document.createElement('button');
+	deleteButton.classList.add('delete');
+	deleteButton.innerText = 'delete';
+
+	newLi.append(checkBox);
+	newLi.append(label);
+	newLi.append(inputText);
+	newLi.append(editButton);
+	newLi.append(deleteButton);
+
+	console.log(newLi);
+	incompleteTaskHolder.appendChild(newLi);
+	bindEvents(newLi);
+}
+
+addItemButton.addEventListener('click', function(){
+	if(addNewItem.value){
+		addItem();
+		addNewItem.value = '';
+	} else {
+		alert('please enter a value!')
+	}
+})
+
+
+//when you add an item you will need to manually call bindEvents
+//on that newly created item to add event listeners
+
+
+</script>
