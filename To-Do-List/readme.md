@@ -1,4 +1,10 @@
-`v3` is the preferred version becuase it attaches event handlers to the object for example 
+## My Version
+
+See `myToDo`
+
+## Authors Versions 
+
+`v3` is the preferred version from another author that I refactored becuase it attaches event handlers to the object for example 
 
 ```
   editButton.addEventListener('click', function(){
